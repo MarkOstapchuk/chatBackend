@@ -90,11 +90,7 @@ export class MessageGateway
           )
         }
       } else {
-        await this.messageService.addUnreadMessages(
-          item,
-          payload.message.dialogId,
-          1
-        )
+        await this.messageService.updateReadMessage(payload.message.id, false)
         console.log(`user ${item} is not online and couldn't receive a message`)
         console.log('so we need to set his messages to unread')
       }
@@ -108,15 +104,14 @@ export class MessageGateway
       chatId: number
     }
   ): Promise<void> {
-    await this.messageService.readAllMessages(payload)
+    await this.messageService.readAllMessages(payload.chatId)
   }
 
   // обновление сообщения
   @SubscribeMessage('message:put')
   async handleMessagePut(
     @MessageBody()
-    payload: // { id: number, text: string }
-    IMessageDto
+    payload: IMessageDto
   ): Promise<void> {
     const updatedMessage = await this.messageService.updateMessage(payload)
     this.server.emit('message:put', updatedMessage)

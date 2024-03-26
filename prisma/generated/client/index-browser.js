@@ -129,8 +129,7 @@ exports.Prisma.DialogScalarFieldEnum = {
   id: 'id',
   pictureUrl: 'pictureUrl',
   lastMessage: 'lastMessage',
-  sentTime: 'sentTime',
-  isRead: 'isRead'
+  sentTime: 'sentTime'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -138,7 +137,8 @@ exports.Prisma.MessageScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   senderId: 'senderId',
-  dialogId: 'dialogId'
+  dialogId: 'dialogId',
+  isRead: 'isRead'
 };
 
 exports.Prisma.SortOrder = {

@@ -22,32 +22,28 @@ export class MessageService {
     return this.prisma.message.deleteMany()
   }
 
-  async readAllMessages(payload: { chatId: number }) {
-    return this.prisma.named_dialog.update({
+  async readAllMessages(chatId: number) {
+    return this.prisma.message.updateMany({
       where: {
-        id: payload.chatId
+        dialogId: chatId
       },
       data: {
-        unreadCount: 0
+        isRead: true
       }
     })
   }
 
-  async addUnreadMessages(userId: number, dialogId: number, count: number) {
-    return this.prisma.named_dialog.updateMany({
+  async updateReadMessage(messageId: number, mode: boolean) {
+    this.prisma.message.update({
       where: {
-        userId,
-        dialogId
+        id: messageId
       },
       data: {
-        unreadCount: {
-          increment: count
-        }
+        isRead: mode
       }
     })
   }
 
-  // создание сообщения
   async createMessage(data: IMessageDto) {
     const dialog = await this.prisma.dialog.update({
       where: {
