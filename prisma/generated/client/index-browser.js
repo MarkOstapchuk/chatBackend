@@ -114,22 +114,23 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   createdAt: 'createdAt',
-  pictureUrl: 'pictureUrl',
-  dialogId: 'dialogId'
-};
-
-exports.Prisma.Named_dialogScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  dialogId: 'dialogId',
-  userId: 'userId'
+  pictureUrl: 'pictureUrl'
 };
 
 exports.Prisma.DialogScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   pictureUrl: 'pictureUrl',
-  lastMessage: 'lastMessage',
-  sentTime: 'sentTime'
+  isGroup: 'isGroup',
+  sentTime: 'sentTime',
+  lastMessage: 'lastMessage'
+};
+
+exports.Prisma.Dialog_participantScalarFieldEnum = {
+  name: 'name',
+  pictureUrl: 'pictureUrl',
+  dialogId: 'dialogId',
+  userId: 'userId'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -138,7 +139,8 @@ exports.Prisma.MessageScalarFieldEnum = {
   createdAt: 'createdAt',
   senderId: 'senderId',
   dialogId: 'dialogId',
-  isRead: 'isRead'
+  unreadById: 'unreadById',
+  status: 'status'
 };
 
 exports.Prisma.SortOrder = {
@@ -155,12 +157,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Status = exports.$Enums.Status = {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  READ: 'READ'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Named_dialog: 'Named_dialog',
   Dialog: 'Dialog',
+  Dialog_participant: 'Dialog_participant',
   Message: 'Message'
 };
 

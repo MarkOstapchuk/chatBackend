@@ -19,20 +19,38 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model Named_dialog
- * 
- */
-export type Named_dialog = $Result.DefaultSelection<Prisma.$Named_dialogPayload>
-/**
  * Model Dialog
  * 
  */
 export type Dialog = $Result.DefaultSelection<Prisma.$DialogPayload>
 /**
+ * Model Dialog_participant
+ * 
+ */
+export type Dialog_participant = $Result.DefaultSelection<Prisma.$Dialog_participantPayload>
+/**
  * Model Message
  * 
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Status: {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  READ: 'READ'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+}
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
 
 /**
  * ##  Prisma Client ʲˢ
@@ -167,16 +185,6 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
-   * `prisma.named_dialog`: Exposes CRUD operations for the **Named_dialog** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Named_dialogs
-    * const named_dialogs = await prisma.named_dialog.findMany()
-    * ```
-    */
-  get named_dialog(): Prisma.Named_dialogDelegate<ExtArgs>;
-
-  /**
    * `prisma.dialog`: Exposes CRUD operations for the **Dialog** model.
     * Example usage:
     * ```ts
@@ -185,6 +193,16 @@ export class PrismaClient<
     * ```
     */
   get dialog(): Prisma.DialogDelegate<ExtArgs>;
+
+  /**
+   * `prisma.dialog_participant`: Exposes CRUD operations for the **Dialog_participant** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Dialog_participants
+    * const dialog_participants = await prisma.dialog_participant.findMany()
+    * ```
+    */
+  get dialog_participant(): Prisma.Dialog_participantDelegate<ExtArgs>;
 
   /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
@@ -666,8 +684,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Named_dialog: 'Named_dialog',
     Dialog: 'Dialog',
+    Dialog_participant: 'Dialog_participant',
     Message: 'Message'
   };
 
@@ -685,7 +703,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'named_dialog' | 'dialog' | 'message'
+      modelProps: 'user' | 'dialog' | 'dialog_participant' | 'message'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -755,72 +773,6 @@ export namespace Prisma {
           }
         }
       }
-      Named_dialog: {
-        payload: Prisma.$Named_dialogPayload<ExtArgs>
-        fields: Prisma.Named_dialogFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.Named_dialogFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.Named_dialogFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          findFirst: {
-            args: Prisma.Named_dialogFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.Named_dialogFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          findMany: {
-            args: Prisma.Named_dialogFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>[]
-          }
-          create: {
-            args: Prisma.Named_dialogCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          createMany: {
-            args: Prisma.Named_dialogCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.Named_dialogDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          update: {
-            args: Prisma.Named_dialogUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          deleteMany: {
-            args: Prisma.Named_dialogDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.Named_dialogUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.Named_dialogUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$Named_dialogPayload>
-          }
-          aggregate: {
-            args: Prisma.Named_dialogAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateNamed_dialog>
-          }
-          groupBy: {
-            args: Prisma.Named_dialogGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<Named_dialogGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.Named_dialogCountArgs<ExtArgs>,
-            result: $Utils.Optional<Named_dialogCountAggregateOutputType> | number
-          }
-        }
-      }
       Dialog: {
         payload: Prisma.$DialogPayload<ExtArgs>
         fields: Prisma.DialogFieldRefs
@@ -884,6 +836,72 @@ export namespace Prisma {
           count: {
             args: Prisma.DialogCountArgs<ExtArgs>,
             result: $Utils.Optional<DialogCountAggregateOutputType> | number
+          }
+        }
+      }
+      Dialog_participant: {
+        payload: Prisma.$Dialog_participantPayload<ExtArgs>
+        fields: Prisma.Dialog_participantFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Dialog_participantFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Dialog_participantFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          findFirst: {
+            args: Prisma.Dialog_participantFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Dialog_participantFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          findMany: {
+            args: Prisma.Dialog_participantFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>[]
+          }
+          create: {
+            args: Prisma.Dialog_participantCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          createMany: {
+            args: Prisma.Dialog_participantCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.Dialog_participantDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          update: {
+            args: Prisma.Dialog_participantUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          deleteMany: {
+            args: Prisma.Dialog_participantDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Dialog_participantUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.Dialog_participantUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$Dialog_participantPayload>
+          }
+          aggregate: {
+            args: Prisma.Dialog_participantAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateDialog_participant>
+          }
+          groupBy: {
+            args: Prisma.Dialog_participantGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Dialog_participantGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Dialog_participantCountArgs<ExtArgs>,
+            result: $Utils.Optional<Dialog_participantCountAggregateOutputType> | number
           }
         }
       }
@@ -1112,13 +1130,13 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    dialogs: number
-    Message: number
+    dialog_participant: number
+    message: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    dialogs?: boolean | UserCountOutputTypeCountDialogsArgs
-    Message?: boolean | UserCountOutputTypeCountMessageArgs
+    dialog_participant?: boolean | UserCountOutputTypeCountDialog_participantArgs
+    message?: boolean | UserCountOutputTypeCountMessageArgs
   }
 
   // Custom InputTypes
@@ -1137,8 +1155,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountDialogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Named_dialogWhereInput
+  export type UserCountOutputTypeCountDialog_participantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Dialog_participantWhereInput
   }
 
 
@@ -1156,15 +1174,13 @@ export namespace Prisma {
    */
 
   export type DialogCountOutputType = {
-    users_id: number
     messages: number
-    named_dialogs: number
+    dialog_participants: number
   }
 
   export type DialogCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_id?: boolean | DialogCountOutputTypeCountUsers_idArgs
     messages?: boolean | DialogCountOutputTypeCountMessagesArgs
-    named_dialogs?: boolean | DialogCountOutputTypeCountNamed_dialogsArgs
+    dialog_participants?: boolean | DialogCountOutputTypeCountDialog_participantsArgs
   }
 
   // Custom InputTypes
@@ -1183,14 +1199,6 @@ export namespace Prisma {
   /**
    * DialogCountOutputType without action
    */
-  export type DialogCountOutputTypeCountUsers_idArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-  }
-
-
-  /**
-   * DialogCountOutputType without action
-   */
   export type DialogCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
   }
@@ -1199,8 +1207,8 @@ export namespace Prisma {
   /**
    * DialogCountOutputType without action
    */
-  export type DialogCountOutputTypeCountNamed_dialogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Named_dialogWhereInput
+  export type DialogCountOutputTypeCountDialog_participantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Dialog_participantWhereInput
   }
 
 
@@ -1223,12 +1231,10 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    dialogId: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
-    dialogId: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1239,7 +1245,6 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     pictureUrl: string | null
-    dialogId: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1250,7 +1255,6 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     pictureUrl: string | null
-    dialogId: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1261,19 +1265,16 @@ export namespace Prisma {
     password: number
     createdAt: number
     pictureUrl: number
-    dialogId: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
     id?: true
-    dialogId?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    dialogId?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -1284,7 +1285,6 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     pictureUrl?: true
-    dialogId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1295,7 +1295,6 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     pictureUrl?: true
-    dialogId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1306,7 +1305,6 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     pictureUrl?: true
-    dialogId?: true
     _all?: true
   }
 
@@ -1403,8 +1401,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt: Date
-    pictureUrl: string
-    dialogId: number | null
+    pictureUrl: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1434,10 +1431,8 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     pictureUrl?: boolean
-    dialogId?: boolean
-    dialogs?: boolean | User$dialogsArgs<ExtArgs>
-    Message?: boolean | User$MessageArgs<ExtArgs>
-    Dialog?: boolean | User$DialogArgs<ExtArgs>
+    dialog_participant?: boolean | User$dialog_participantArgs<ExtArgs>
+    message?: boolean | User$messageArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1449,13 +1444,11 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     pictureUrl?: boolean
-    dialogId?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    dialogs?: boolean | User$dialogsArgs<ExtArgs>
-    Message?: boolean | User$MessageArgs<ExtArgs>
-    Dialog?: boolean | User$DialogArgs<ExtArgs>
+    dialog_participant?: boolean | User$dialog_participantArgs<ExtArgs>
+    message?: boolean | User$messageArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1463,9 +1456,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      dialogs: Prisma.$Named_dialogPayload<ExtArgs>[]
-      Message: Prisma.$MessagePayload<ExtArgs>[]
-      Dialog: Prisma.$DialogPayload<ExtArgs> | null
+      dialog_participant: Prisma.$Dialog_participantPayload<ExtArgs>[]
+      message: Prisma.$MessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1474,8 +1466,7 @@ export namespace Prisma {
       username: string
       password: string
       createdAt: Date
-      pictureUrl: string
-      dialogId: number | null
+      pictureUrl: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1841,11 +1832,9 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    dialogs<T extends User$dialogsArgs<ExtArgs> = {}>(args?: Subset<T, User$dialogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findMany'> | Null>;
+    dialog_participant<T extends User$dialog_participantArgs<ExtArgs> = {}>(args?: Subset<T, User$dialog_participantArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    Message<T extends User$MessageArgs<ExtArgs> = {}>(args?: Subset<T, User$MessageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    Dialog<T extends User$DialogArgs<ExtArgs> = {}>(args?: Subset<T, User$DialogArgs<ExtArgs>>): Prisma__DialogClient<$Result.GetResult<Prisma.$DialogPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    message<T extends User$messageArgs<ExtArgs> = {}>(args?: Subset<T, User$messageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1882,7 +1871,6 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly pictureUrl: FieldRef<"User", 'String'>
-    readonly dialogId: FieldRef<"User", 'Int'>
   }
     
 
@@ -2195,30 +2183,30 @@ export namespace Prisma {
 
 
   /**
-   * User.dialogs
+   * User.dialog_participant
    */
-  export type User$dialogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$dialog_participantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Named_dialog
+     * Select specific fields to fetch from the Dialog_participant
      */
-    select?: Named_dialogSelect<ExtArgs> | null
+    select?: Dialog_participantSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: Named_dialogInclude<ExtArgs> | null
-    where?: Named_dialogWhereInput
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    cursor?: Named_dialogWhereUniqueInput
+    include?: Dialog_participantInclude<ExtArgs> | null
+    where?: Dialog_participantWhereInput
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    cursor?: Dialog_participantWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Named_dialogScalarFieldEnum | Named_dialogScalarFieldEnum[]
+    distinct?: Dialog_participantScalarFieldEnum | Dialog_participantScalarFieldEnum[]
   }
 
 
   /**
-   * User.Message
+   * User.message
    */
-  export type User$MessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$messageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Message
      */
@@ -2237,22 +2225,6 @@ export namespace Prisma {
 
 
   /**
-   * User.Dialog
-   */
-  export type User$DialogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dialog
-     */
-    select?: DialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: DialogInclude<ExtArgs> | null
-    where?: DialogWhereInput
-  }
-
-
-  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2264,976 +2236,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: UserInclude<ExtArgs> | null
-  }
-
-
-
-  /**
-   * Model Named_dialog
-   */
-
-  export type AggregateNamed_dialog = {
-    _count: Named_dialogCountAggregateOutputType | null
-    _avg: Named_dialogAvgAggregateOutputType | null
-    _sum: Named_dialogSumAggregateOutputType | null
-    _min: Named_dialogMinAggregateOutputType | null
-    _max: Named_dialogMaxAggregateOutputType | null
-  }
-
-  export type Named_dialogAvgAggregateOutputType = {
-    id: number | null
-    dialogId: number | null
-    userId: number | null
-  }
-
-  export type Named_dialogSumAggregateOutputType = {
-    id: number | null
-    dialogId: number | null
-    userId: number | null
-  }
-
-  export type Named_dialogMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    dialogId: number | null
-    userId: number | null
-  }
-
-  export type Named_dialogMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-    dialogId: number | null
-    userId: number | null
-  }
-
-  export type Named_dialogCountAggregateOutputType = {
-    id: number
-    name: number
-    dialogId: number
-    userId: number
-    _all: number
-  }
-
-
-  export type Named_dialogAvgAggregateInputType = {
-    id?: true
-    dialogId?: true
-    userId?: true
-  }
-
-  export type Named_dialogSumAggregateInputType = {
-    id?: true
-    dialogId?: true
-    userId?: true
-  }
-
-  export type Named_dialogMinAggregateInputType = {
-    id?: true
-    name?: true
-    dialogId?: true
-    userId?: true
-  }
-
-  export type Named_dialogMaxAggregateInputType = {
-    id?: true
-    name?: true
-    dialogId?: true
-    userId?: true
-  }
-
-  export type Named_dialogCountAggregateInputType = {
-    id?: true
-    name?: true
-    dialogId?: true
-    userId?: true
-    _all?: true
-  }
-
-  export type Named_dialogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Named_dialog to aggregate.
-     */
-    where?: Named_dialogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Named_dialogs to fetch.
-     */
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: Named_dialogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Named_dialogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Named_dialogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Named_dialogs
-    **/
-    _count?: true | Named_dialogCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Named_dialogAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Named_dialogSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Named_dialogMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Named_dialogMaxAggregateInputType
-  }
-
-  export type GetNamed_dialogAggregateType<T extends Named_dialogAggregateArgs> = {
-        [P in keyof T & keyof AggregateNamed_dialog]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNamed_dialog[P]>
-      : GetScalarType<T[P], AggregateNamed_dialog[P]>
-  }
-
-
-
-
-  export type Named_dialogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Named_dialogWhereInput
-    orderBy?: Named_dialogOrderByWithAggregationInput | Named_dialogOrderByWithAggregationInput[]
-    by: Named_dialogScalarFieldEnum[] | Named_dialogScalarFieldEnum
-    having?: Named_dialogScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Named_dialogCountAggregateInputType | true
-    _avg?: Named_dialogAvgAggregateInputType
-    _sum?: Named_dialogSumAggregateInputType
-    _min?: Named_dialogMinAggregateInputType
-    _max?: Named_dialogMaxAggregateInputType
-  }
-
-  export type Named_dialogGroupByOutputType = {
-    id: number
-    name: string
-    dialogId: number
-    userId: number | null
-    _count: Named_dialogCountAggregateOutputType | null
-    _avg: Named_dialogAvgAggregateOutputType | null
-    _sum: Named_dialogSumAggregateOutputType | null
-    _min: Named_dialogMinAggregateOutputType | null
-    _max: Named_dialogMaxAggregateOutputType | null
-  }
-
-  type GetNamed_dialogGroupByPayload<T extends Named_dialogGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Named_dialogGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Named_dialogGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Named_dialogGroupByOutputType[P]>
-            : GetScalarType<T[P], Named_dialogGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type Named_dialogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    dialogId?: boolean
-    userId?: boolean
-    dialog?: boolean | DialogDefaultArgs<ExtArgs>
-    User?: boolean | Named_dialog$UserArgs<ExtArgs>
-  }, ExtArgs["result"]["named_dialog"]>
-
-  export type Named_dialogSelectScalar = {
-    id?: boolean
-    name?: boolean
-    dialogId?: boolean
-    userId?: boolean
-  }
-
-  export type Named_dialogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    dialog?: boolean | DialogDefaultArgs<ExtArgs>
-    User?: boolean | Named_dialog$UserArgs<ExtArgs>
-  }
-
-
-  export type $Named_dialogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Named_dialog"
-    objects: {
-      dialog: Prisma.$DialogPayload<ExtArgs>
-      User: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-      dialogId: number
-      userId: number | null
-    }, ExtArgs["result"]["named_dialog"]>
-    composites: {}
-  }
-
-
-  type Named_dialogGetPayload<S extends boolean | null | undefined | Named_dialogDefaultArgs> = $Result.GetResult<Prisma.$Named_dialogPayload, S>
-
-  type Named_dialogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<Named_dialogFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: Named_dialogCountAggregateInputType | true
-    }
-
-  export interface Named_dialogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Named_dialog'], meta: { name: 'Named_dialog' } }
-    /**
-     * Find zero or one Named_dialog that matches the filter.
-     * @param {Named_dialogFindUniqueArgs} args - Arguments to find a Named_dialog
-     * @example
-     * // Get one Named_dialog
-     * const named_dialog = await prisma.named_dialog.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends Named_dialogFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogFindUniqueArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Named_dialog that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {Named_dialogFindUniqueOrThrowArgs} args - Arguments to find a Named_dialog
-     * @example
-     * // Get one Named_dialog
-     * const named_dialog = await prisma.named_dialog.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends Named_dialogFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Named_dialog that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogFindFirstArgs} args - Arguments to find a Named_dialog
-     * @example
-     * // Get one Named_dialog
-     * const named_dialog = await prisma.named_dialog.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends Named_dialogFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogFindFirstArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Named_dialog that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogFindFirstOrThrowArgs} args - Arguments to find a Named_dialog
-     * @example
-     * // Get one Named_dialog
-     * const named_dialog = await prisma.named_dialog.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends Named_dialogFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Named_dialogs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Named_dialogs
-     * const named_dialogs = await prisma.named_dialog.findMany()
-     * 
-     * // Get first 10 Named_dialogs
-     * const named_dialogs = await prisma.named_dialog.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const named_dialogWithIdOnly = await prisma.named_dialog.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends Named_dialogFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Named_dialog.
-     * @param {Named_dialogCreateArgs} args - Arguments to create a Named_dialog.
-     * @example
-     * // Create one Named_dialog
-     * const Named_dialog = await prisma.named_dialog.create({
-     *   data: {
-     *     // ... data to create a Named_dialog
-     *   }
-     * })
-     * 
-    **/
-    create<T extends Named_dialogCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogCreateArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Named_dialogs.
-     *     @param {Named_dialogCreateManyArgs} args - Arguments to create many Named_dialogs.
-     *     @example
-     *     // Create many Named_dialogs
-     *     const named_dialog = await prisma.named_dialog.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends Named_dialogCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Named_dialog.
-     * @param {Named_dialogDeleteArgs} args - Arguments to delete one Named_dialog.
-     * @example
-     * // Delete one Named_dialog
-     * const Named_dialog = await prisma.named_dialog.delete({
-     *   where: {
-     *     // ... filter to delete one Named_dialog
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends Named_dialogDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogDeleteArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Named_dialog.
-     * @param {Named_dialogUpdateArgs} args - Arguments to update one Named_dialog.
-     * @example
-     * // Update one Named_dialog
-     * const named_dialog = await prisma.named_dialog.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends Named_dialogUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogUpdateArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Named_dialogs.
-     * @param {Named_dialogDeleteManyArgs} args - Arguments to filter Named_dialogs to delete.
-     * @example
-     * // Delete a few Named_dialogs
-     * const { count } = await prisma.named_dialog.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends Named_dialogDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, Named_dialogDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Named_dialogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Named_dialogs
-     * const named_dialog = await prisma.named_dialog.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends Named_dialogUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Named_dialog.
-     * @param {Named_dialogUpsertArgs} args - Arguments to update or create a Named_dialog.
-     * @example
-     * // Update or create a Named_dialog
-     * const named_dialog = await prisma.named_dialog.upsert({
-     *   create: {
-     *     // ... data to create a Named_dialog
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Named_dialog we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends Named_dialogUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, Named_dialogUpsertArgs<ExtArgs>>
-    ): Prisma__Named_dialogClient<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Named_dialogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogCountArgs} args - Arguments to filter Named_dialogs to count.
-     * @example
-     * // Count the number of Named_dialogs
-     * const count = await prisma.named_dialog.count({
-     *   where: {
-     *     // ... the filter for the Named_dialogs we want to count
-     *   }
-     * })
-    **/
-    count<T extends Named_dialogCountArgs>(
-      args?: Subset<T, Named_dialogCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Named_dialogCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Named_dialog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Named_dialogAggregateArgs>(args: Subset<T, Named_dialogAggregateArgs>): Prisma.PrismaPromise<GetNamed_dialogAggregateType<T>>
-
-    /**
-     * Group by Named_dialog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Named_dialogGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends Named_dialogGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: Named_dialogGroupByArgs['orderBy'] }
-        : { orderBy?: Named_dialogGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, Named_dialogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNamed_dialogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Named_dialog model
-   */
-  readonly fields: Named_dialogFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Named_dialog.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__Named_dialogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    dialog<T extends DialogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DialogDefaultArgs<ExtArgs>>): Prisma__DialogClient<$Result.GetResult<Prisma.$DialogPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    User<T extends Named_dialog$UserArgs<ExtArgs> = {}>(args?: Subset<T, Named_dialog$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Named_dialog model
-   */ 
-  interface Named_dialogFieldRefs {
-    readonly id: FieldRef<"Named_dialog", 'Int'>
-    readonly name: FieldRef<"Named_dialog", 'String'>
-    readonly dialogId: FieldRef<"Named_dialog", 'Int'>
-    readonly userId: FieldRef<"Named_dialog", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * Named_dialog findUnique
-   */
-  export type Named_dialogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter, which Named_dialog to fetch.
-     */
-    where: Named_dialogWhereUniqueInput
-  }
-
-
-  /**
-   * Named_dialog findUniqueOrThrow
-   */
-  export type Named_dialogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter, which Named_dialog to fetch.
-     */
-    where: Named_dialogWhereUniqueInput
-  }
-
-
-  /**
-   * Named_dialog findFirst
-   */
-  export type Named_dialogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter, which Named_dialog to fetch.
-     */
-    where?: Named_dialogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Named_dialogs to fetch.
-     */
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Named_dialogs.
-     */
-    cursor?: Named_dialogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Named_dialogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Named_dialogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Named_dialogs.
-     */
-    distinct?: Named_dialogScalarFieldEnum | Named_dialogScalarFieldEnum[]
-  }
-
-
-  /**
-   * Named_dialog findFirstOrThrow
-   */
-  export type Named_dialogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter, which Named_dialog to fetch.
-     */
-    where?: Named_dialogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Named_dialogs to fetch.
-     */
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Named_dialogs.
-     */
-    cursor?: Named_dialogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Named_dialogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Named_dialogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Named_dialogs.
-     */
-    distinct?: Named_dialogScalarFieldEnum | Named_dialogScalarFieldEnum[]
-  }
-
-
-  /**
-   * Named_dialog findMany
-   */
-  export type Named_dialogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter, which Named_dialogs to fetch.
-     */
-    where?: Named_dialogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Named_dialogs to fetch.
-     */
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Named_dialogs.
-     */
-    cursor?: Named_dialogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Named_dialogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Named_dialogs.
-     */
-    skip?: number
-    distinct?: Named_dialogScalarFieldEnum | Named_dialogScalarFieldEnum[]
-  }
-
-
-  /**
-   * Named_dialog create
-   */
-  export type Named_dialogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Named_dialog.
-     */
-    data: XOR<Named_dialogCreateInput, Named_dialogUncheckedCreateInput>
-  }
-
-
-  /**
-   * Named_dialog createMany
-   */
-  export type Named_dialogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Named_dialogs.
-     */
-    data: Named_dialogCreateManyInput | Named_dialogCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * Named_dialog update
-   */
-  export type Named_dialogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Named_dialog.
-     */
-    data: XOR<Named_dialogUpdateInput, Named_dialogUncheckedUpdateInput>
-    /**
-     * Choose, which Named_dialog to update.
-     */
-    where: Named_dialogWhereUniqueInput
-  }
-
-
-  /**
-   * Named_dialog updateMany
-   */
-  export type Named_dialogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Named_dialogs.
-     */
-    data: XOR<Named_dialogUpdateManyMutationInput, Named_dialogUncheckedUpdateManyInput>
-    /**
-     * Filter which Named_dialogs to update
-     */
-    where?: Named_dialogWhereInput
-  }
-
-
-  /**
-   * Named_dialog upsert
-   */
-  export type Named_dialogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Named_dialog to update in case it exists.
-     */
-    where: Named_dialogWhereUniqueInput
-    /**
-     * In case the Named_dialog found by the `where` argument doesn't exist, create a new Named_dialog with this data.
-     */
-    create: XOR<Named_dialogCreateInput, Named_dialogUncheckedCreateInput>
-    /**
-     * In case the Named_dialog was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<Named_dialogUpdateInput, Named_dialogUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Named_dialog delete
-   */
-  export type Named_dialogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
-    /**
-     * Filter which Named_dialog to delete.
-     */
-    where: Named_dialogWhereUniqueInput
-  }
-
-
-  /**
-   * Named_dialog deleteMany
-   */
-  export type Named_dialogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Named_dialogs to delete
-     */
-    where?: Named_dialogWhereInput
-  }
-
-
-  /**
-   * Named_dialog.User
-   */
-  export type Named_dialog$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-
-  /**
-   * Named_dialog without action
-   */
-  export type Named_dialogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Named_dialog
-     */
-    select?: Named_dialogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: Named_dialogInclude<ExtArgs> | null
   }
 
 
@@ -3260,23 +2262,29 @@ export namespace Prisma {
 
   export type DialogMinAggregateOutputType = {
     id: number | null
+    name: string | null
     pictureUrl: string | null
-    lastMessage: string | null
+    isGroup: boolean | null
     sentTime: Date | null
+    lastMessage: string | null
   }
 
   export type DialogMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     pictureUrl: string | null
-    lastMessage: string | null
+    isGroup: boolean | null
     sentTime: Date | null
+    lastMessage: string | null
   }
 
   export type DialogCountAggregateOutputType = {
     id: number
+    name: number
     pictureUrl: number
-    lastMessage: number
+    isGroup: number
     sentTime: number
+    lastMessage: number
     _all: number
   }
 
@@ -3291,23 +2299,29 @@ export namespace Prisma {
 
   export type DialogMinAggregateInputType = {
     id?: true
+    name?: true
     pictureUrl?: true
-    lastMessage?: true
+    isGroup?: true
     sentTime?: true
+    lastMessage?: true
   }
 
   export type DialogMaxAggregateInputType = {
     id?: true
+    name?: true
     pictureUrl?: true
-    lastMessage?: true
+    isGroup?: true
     sentTime?: true
+    lastMessage?: true
   }
 
   export type DialogCountAggregateInputType = {
     id?: true
+    name?: true
     pictureUrl?: true
-    lastMessage?: true
+    isGroup?: true
     sentTime?: true
+    lastMessage?: true
     _all?: true
   }
 
@@ -3399,9 +2413,11 @@ export namespace Prisma {
 
   export type DialogGroupByOutputType = {
     id: number
+    name: string | null
     pictureUrl: string | null
-    lastMessage: string | null
+    isGroup: boolean
     sentTime: Date | null
+    lastMessage: string | null
     _count: DialogCountAggregateOutputType | null
     _avg: DialogAvgAggregateOutputType | null
     _sum: DialogSumAggregateOutputType | null
@@ -3425,26 +2441,28 @@ export namespace Prisma {
 
   export type DialogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     pictureUrl?: boolean
-    lastMessage?: boolean
+    isGroup?: boolean
     sentTime?: boolean
-    users_id?: boolean | Dialog$users_idArgs<ExtArgs>
+    lastMessage?: boolean
     messages?: boolean | Dialog$messagesArgs<ExtArgs>
-    named_dialogs?: boolean | Dialog$named_dialogsArgs<ExtArgs>
+    dialog_participants?: boolean | Dialog$dialog_participantsArgs<ExtArgs>
     _count?: boolean | DialogCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dialog"]>
 
   export type DialogSelectScalar = {
     id?: boolean
+    name?: boolean
     pictureUrl?: boolean
-    lastMessage?: boolean
+    isGroup?: boolean
     sentTime?: boolean
+    lastMessage?: boolean
   }
 
   export type DialogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_id?: boolean | Dialog$users_idArgs<ExtArgs>
     messages?: boolean | Dialog$messagesArgs<ExtArgs>
-    named_dialogs?: boolean | Dialog$named_dialogsArgs<ExtArgs>
+    dialog_participants?: boolean | Dialog$dialog_participantsArgs<ExtArgs>
     _count?: boolean | DialogCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3452,15 +2470,16 @@ export namespace Prisma {
   export type $DialogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Dialog"
     objects: {
-      users_id: Prisma.$UserPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
-      named_dialogs: Prisma.$Named_dialogPayload<ExtArgs>[]
+      dialog_participants: Prisma.$Dialog_participantPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string | null
       pictureUrl: string | null
-      lastMessage: string | null
+      isGroup: boolean
       sentTime: Date | null
+      lastMessage: string | null
     }, ExtArgs["result"]["dialog"]>
     composites: {}
   }
@@ -3826,11 +2845,9 @@ export namespace Prisma {
   export interface Prisma__DialogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    users_id<T extends Dialog$users_idArgs<ExtArgs> = {}>(args?: Subset<T, Dialog$users_idArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     messages<T extends Dialog$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Dialog$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    named_dialogs<T extends Dialog$named_dialogsArgs<ExtArgs> = {}>(args?: Subset<T, Dialog$named_dialogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Named_dialogPayload<ExtArgs>, T, 'findMany'> | Null>;
+    dialog_participants<T extends Dialog$dialog_participantsArgs<ExtArgs> = {}>(args?: Subset<T, Dialog$dialog_participantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3861,9 +2878,11 @@ export namespace Prisma {
    */ 
   interface DialogFieldRefs {
     readonly id: FieldRef<"Dialog", 'Int'>
+    readonly name: FieldRef<"Dialog", 'String'>
     readonly pictureUrl: FieldRef<"Dialog", 'String'>
-    readonly lastMessage: FieldRef<"Dialog", 'String'>
+    readonly isGroup: FieldRef<"Dialog", 'Boolean'>
     readonly sentTime: FieldRef<"Dialog", 'DateTime'>
+    readonly lastMessage: FieldRef<"Dialog", 'String'>
   }
     
 
@@ -4176,27 +3195,6 @@ export namespace Prisma {
 
 
   /**
-   * Dialog.users_id
-   */
-  export type Dialog$users_idArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-
-  /**
    * Dialog.messages
    */
   export type Dialog$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4218,23 +3216,23 @@ export namespace Prisma {
 
 
   /**
-   * Dialog.named_dialogs
+   * Dialog.dialog_participants
    */
-  export type Dialog$named_dialogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Dialog$dialog_participantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Named_dialog
+     * Select specific fields to fetch from the Dialog_participant
      */
-    select?: Named_dialogSelect<ExtArgs> | null
+    select?: Dialog_participantSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: Named_dialogInclude<ExtArgs> | null
-    where?: Named_dialogWhereInput
-    orderBy?: Named_dialogOrderByWithRelationInput | Named_dialogOrderByWithRelationInput[]
-    cursor?: Named_dialogWhereUniqueInput
+    include?: Dialog_participantInclude<ExtArgs> | null
+    where?: Dialog_participantWhereInput
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    cursor?: Dialog_participantWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Named_dialogScalarFieldEnum | Named_dialogScalarFieldEnum[]
+    distinct?: Dialog_participantScalarFieldEnum | Dialog_participantScalarFieldEnum[]
   }
 
 
@@ -4255,6 +3253,956 @@ export namespace Prisma {
 
 
   /**
+   * Model Dialog_participant
+   */
+
+  export type AggregateDialog_participant = {
+    _count: Dialog_participantCountAggregateOutputType | null
+    _avg: Dialog_participantAvgAggregateOutputType | null
+    _sum: Dialog_participantSumAggregateOutputType | null
+    _min: Dialog_participantMinAggregateOutputType | null
+    _max: Dialog_participantMaxAggregateOutputType | null
+  }
+
+  export type Dialog_participantAvgAggregateOutputType = {
+    dialogId: number | null
+    userId: number | null
+  }
+
+  export type Dialog_participantSumAggregateOutputType = {
+    dialogId: number | null
+    userId: number | null
+  }
+
+  export type Dialog_participantMinAggregateOutputType = {
+    name: string | null
+    pictureUrl: string | null
+    dialogId: number | null
+    userId: number | null
+  }
+
+  export type Dialog_participantMaxAggregateOutputType = {
+    name: string | null
+    pictureUrl: string | null
+    dialogId: number | null
+    userId: number | null
+  }
+
+  export type Dialog_participantCountAggregateOutputType = {
+    name: number
+    pictureUrl: number
+    dialogId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type Dialog_participantAvgAggregateInputType = {
+    dialogId?: true
+    userId?: true
+  }
+
+  export type Dialog_participantSumAggregateInputType = {
+    dialogId?: true
+    userId?: true
+  }
+
+  export type Dialog_participantMinAggregateInputType = {
+    name?: true
+    pictureUrl?: true
+    dialogId?: true
+    userId?: true
+  }
+
+  export type Dialog_participantMaxAggregateInputType = {
+    name?: true
+    pictureUrl?: true
+    dialogId?: true
+    userId?: true
+  }
+
+  export type Dialog_participantCountAggregateInputType = {
+    name?: true
+    pictureUrl?: true
+    dialogId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type Dialog_participantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Dialog_participant to aggregate.
+     */
+    where?: Dialog_participantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Dialog_participants to fetch.
+     */
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Dialog_participantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Dialog_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Dialog_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Dialog_participants
+    **/
+    _count?: true | Dialog_participantCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Dialog_participantAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Dialog_participantSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Dialog_participantMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Dialog_participantMaxAggregateInputType
+  }
+
+  export type GetDialog_participantAggregateType<T extends Dialog_participantAggregateArgs> = {
+        [P in keyof T & keyof AggregateDialog_participant]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDialog_participant[P]>
+      : GetScalarType<T[P], AggregateDialog_participant[P]>
+  }
+
+
+
+
+  export type Dialog_participantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Dialog_participantWhereInput
+    orderBy?: Dialog_participantOrderByWithAggregationInput | Dialog_participantOrderByWithAggregationInput[]
+    by: Dialog_participantScalarFieldEnum[] | Dialog_participantScalarFieldEnum
+    having?: Dialog_participantScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Dialog_participantCountAggregateInputType | true
+    _avg?: Dialog_participantAvgAggregateInputType
+    _sum?: Dialog_participantSumAggregateInputType
+    _min?: Dialog_participantMinAggregateInputType
+    _max?: Dialog_participantMaxAggregateInputType
+  }
+
+  export type Dialog_participantGroupByOutputType = {
+    name: string
+    pictureUrl: string | null
+    dialogId: number
+    userId: number
+    _count: Dialog_participantCountAggregateOutputType | null
+    _avg: Dialog_participantAvgAggregateOutputType | null
+    _sum: Dialog_participantSumAggregateOutputType | null
+    _min: Dialog_participantMinAggregateOutputType | null
+    _max: Dialog_participantMaxAggregateOutputType | null
+  }
+
+  type GetDialog_participantGroupByPayload<T extends Dialog_participantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Dialog_participantGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Dialog_participantGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Dialog_participantGroupByOutputType[P]>
+            : GetScalarType<T[P], Dialog_participantGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Dialog_participantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    name?: boolean
+    pictureUrl?: boolean
+    dialogId?: boolean
+    userId?: boolean
+    dialog?: boolean | DialogDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dialog_participant"]>
+
+  export type Dialog_participantSelectScalar = {
+    name?: boolean
+    pictureUrl?: boolean
+    dialogId?: boolean
+    userId?: boolean
+  }
+
+  export type Dialog_participantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dialog?: boolean | DialogDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+
+  export type $Dialog_participantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Dialog_participant"
+    objects: {
+      dialog: Prisma.$DialogPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      name: string
+      pictureUrl: string | null
+      dialogId: number
+      userId: number
+    }, ExtArgs["result"]["dialog_participant"]>
+    composites: {}
+  }
+
+
+  type Dialog_participantGetPayload<S extends boolean | null | undefined | Dialog_participantDefaultArgs> = $Result.GetResult<Prisma.$Dialog_participantPayload, S>
+
+  type Dialog_participantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<Dialog_participantFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Dialog_participantCountAggregateInputType | true
+    }
+
+  export interface Dialog_participantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Dialog_participant'], meta: { name: 'Dialog_participant' } }
+    /**
+     * Find zero or one Dialog_participant that matches the filter.
+     * @param {Dialog_participantFindUniqueArgs} args - Arguments to find a Dialog_participant
+     * @example
+     * // Get one Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends Dialog_participantFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantFindUniqueArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Dialog_participant that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {Dialog_participantFindUniqueOrThrowArgs} args - Arguments to find a Dialog_participant
+     * @example
+     * // Get one Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends Dialog_participantFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Dialog_participant that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantFindFirstArgs} args - Arguments to find a Dialog_participant
+     * @example
+     * // Get one Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends Dialog_participantFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantFindFirstArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Dialog_participant that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantFindFirstOrThrowArgs} args - Arguments to find a Dialog_participant
+     * @example
+     * // Get one Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends Dialog_participantFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Dialog_participants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Dialog_participants
+     * const dialog_participants = await prisma.dialog_participant.findMany()
+     * 
+     * // Get first 10 Dialog_participants
+     * const dialog_participants = await prisma.dialog_participant.findMany({ take: 10 })
+     * 
+     * // Only select the `name`
+     * const dialog_participantWithNameOnly = await prisma.dialog_participant.findMany({ select: { name: true } })
+     * 
+    **/
+    findMany<T extends Dialog_participantFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Dialog_participant.
+     * @param {Dialog_participantCreateArgs} args - Arguments to create a Dialog_participant.
+     * @example
+     * // Create one Dialog_participant
+     * const Dialog_participant = await prisma.dialog_participant.create({
+     *   data: {
+     *     // ... data to create a Dialog_participant
+     *   }
+     * })
+     * 
+    **/
+    create<T extends Dialog_participantCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantCreateArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Dialog_participants.
+     *     @param {Dialog_participantCreateManyArgs} args - Arguments to create many Dialog_participants.
+     *     @example
+     *     // Create many Dialog_participants
+     *     const dialog_participant = await prisma.dialog_participant.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends Dialog_participantCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Dialog_participant.
+     * @param {Dialog_participantDeleteArgs} args - Arguments to delete one Dialog_participant.
+     * @example
+     * // Delete one Dialog_participant
+     * const Dialog_participant = await prisma.dialog_participant.delete({
+     *   where: {
+     *     // ... filter to delete one Dialog_participant
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends Dialog_participantDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantDeleteArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Dialog_participant.
+     * @param {Dialog_participantUpdateArgs} args - Arguments to update one Dialog_participant.
+     * @example
+     * // Update one Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends Dialog_participantUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantUpdateArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Dialog_participants.
+     * @param {Dialog_participantDeleteManyArgs} args - Arguments to filter Dialog_participants to delete.
+     * @example
+     * // Delete a few Dialog_participants
+     * const { count } = await prisma.dialog_participant.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends Dialog_participantDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, Dialog_participantDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Dialog_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Dialog_participants
+     * const dialog_participant = await prisma.dialog_participant.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends Dialog_participantUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Dialog_participant.
+     * @param {Dialog_participantUpsertArgs} args - Arguments to update or create a Dialog_participant.
+     * @example
+     * // Update or create a Dialog_participant
+     * const dialog_participant = await prisma.dialog_participant.upsert({
+     *   create: {
+     *     // ... data to create a Dialog_participant
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Dialog_participant we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends Dialog_participantUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, Dialog_participantUpsertArgs<ExtArgs>>
+    ): Prisma__Dialog_participantClient<$Result.GetResult<Prisma.$Dialog_participantPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Dialog_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantCountArgs} args - Arguments to filter Dialog_participants to count.
+     * @example
+     * // Count the number of Dialog_participants
+     * const count = await prisma.dialog_participant.count({
+     *   where: {
+     *     // ... the filter for the Dialog_participants we want to count
+     *   }
+     * })
+    **/
+    count<T extends Dialog_participantCountArgs>(
+      args?: Subset<T, Dialog_participantCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Dialog_participantCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Dialog_participant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Dialog_participantAggregateArgs>(args: Subset<T, Dialog_participantAggregateArgs>): Prisma.PrismaPromise<GetDialog_participantAggregateType<T>>
+
+    /**
+     * Group by Dialog_participant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Dialog_participantGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Dialog_participantGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Dialog_participantGroupByArgs['orderBy'] }
+        : { orderBy?: Dialog_participantGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Dialog_participantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDialog_participantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Dialog_participant model
+   */
+  readonly fields: Dialog_participantFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Dialog_participant.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Dialog_participantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    dialog<T extends DialogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DialogDefaultArgs<ExtArgs>>): Prisma__DialogClient<$Result.GetResult<Prisma.$DialogPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Dialog_participant model
+   */ 
+  interface Dialog_participantFieldRefs {
+    readonly name: FieldRef<"Dialog_participant", 'String'>
+    readonly pictureUrl: FieldRef<"Dialog_participant", 'String'>
+    readonly dialogId: FieldRef<"Dialog_participant", 'Int'>
+    readonly userId: FieldRef<"Dialog_participant", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Dialog_participant findUnique
+   */
+  export type Dialog_participantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter, which Dialog_participant to fetch.
+     */
+    where: Dialog_participantWhereUniqueInput
+  }
+
+
+  /**
+   * Dialog_participant findUniqueOrThrow
+   */
+  export type Dialog_participantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter, which Dialog_participant to fetch.
+     */
+    where: Dialog_participantWhereUniqueInput
+  }
+
+
+  /**
+   * Dialog_participant findFirst
+   */
+  export type Dialog_participantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter, which Dialog_participant to fetch.
+     */
+    where?: Dialog_participantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Dialog_participants to fetch.
+     */
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Dialog_participants.
+     */
+    cursor?: Dialog_participantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Dialog_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Dialog_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Dialog_participants.
+     */
+    distinct?: Dialog_participantScalarFieldEnum | Dialog_participantScalarFieldEnum[]
+  }
+
+
+  /**
+   * Dialog_participant findFirstOrThrow
+   */
+  export type Dialog_participantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter, which Dialog_participant to fetch.
+     */
+    where?: Dialog_participantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Dialog_participants to fetch.
+     */
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Dialog_participants.
+     */
+    cursor?: Dialog_participantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Dialog_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Dialog_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Dialog_participants.
+     */
+    distinct?: Dialog_participantScalarFieldEnum | Dialog_participantScalarFieldEnum[]
+  }
+
+
+  /**
+   * Dialog_participant findMany
+   */
+  export type Dialog_participantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter, which Dialog_participants to fetch.
+     */
+    where?: Dialog_participantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Dialog_participants to fetch.
+     */
+    orderBy?: Dialog_participantOrderByWithRelationInput | Dialog_participantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Dialog_participants.
+     */
+    cursor?: Dialog_participantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Dialog_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Dialog_participants.
+     */
+    skip?: number
+    distinct?: Dialog_participantScalarFieldEnum | Dialog_participantScalarFieldEnum[]
+  }
+
+
+  /**
+   * Dialog_participant create
+   */
+  export type Dialog_participantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Dialog_participant.
+     */
+    data: XOR<Dialog_participantCreateInput, Dialog_participantUncheckedCreateInput>
+  }
+
+
+  /**
+   * Dialog_participant createMany
+   */
+  export type Dialog_participantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Dialog_participants.
+     */
+    data: Dialog_participantCreateManyInput | Dialog_participantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Dialog_participant update
+   */
+  export type Dialog_participantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Dialog_participant.
+     */
+    data: XOR<Dialog_participantUpdateInput, Dialog_participantUncheckedUpdateInput>
+    /**
+     * Choose, which Dialog_participant to update.
+     */
+    where: Dialog_participantWhereUniqueInput
+  }
+
+
+  /**
+   * Dialog_participant updateMany
+   */
+  export type Dialog_participantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Dialog_participants.
+     */
+    data: XOR<Dialog_participantUpdateManyMutationInput, Dialog_participantUncheckedUpdateManyInput>
+    /**
+     * Filter which Dialog_participants to update
+     */
+    where?: Dialog_participantWhereInput
+  }
+
+
+  /**
+   * Dialog_participant upsert
+   */
+  export type Dialog_participantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Dialog_participant to update in case it exists.
+     */
+    where: Dialog_participantWhereUniqueInput
+    /**
+     * In case the Dialog_participant found by the `where` argument doesn't exist, create a new Dialog_participant with this data.
+     */
+    create: XOR<Dialog_participantCreateInput, Dialog_participantUncheckedCreateInput>
+    /**
+     * In case the Dialog_participant was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Dialog_participantUpdateInput, Dialog_participantUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Dialog_participant delete
+   */
+  export type Dialog_participantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+    /**
+     * Filter which Dialog_participant to delete.
+     */
+    where: Dialog_participantWhereUniqueInput
+  }
+
+
+  /**
+   * Dialog_participant deleteMany
+   */
+  export type Dialog_participantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Dialog_participants to delete
+     */
+    where?: Dialog_participantWhereInput
+  }
+
+
+  /**
+   * Dialog_participant without action
+   */
+  export type Dialog_participantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dialog_participant
+     */
+    select?: Dialog_participantSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: Dialog_participantInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model Message
    */
 
@@ -4270,12 +4218,14 @@ export namespace Prisma {
     id: number | null
     senderId: number | null
     dialogId: number | null
+    unreadById: number | null
   }
 
   export type MessageSumAggregateOutputType = {
     id: number | null
     senderId: number | null
     dialogId: number | null
+    unreadById: number[]
   }
 
   export type MessageMinAggregateOutputType = {
@@ -4284,7 +4234,7 @@ export namespace Prisma {
     createdAt: Date | null
     senderId: number | null
     dialogId: number | null
-    isRead: boolean | null
+    status: $Enums.Status | null
   }
 
   export type MessageMaxAggregateOutputType = {
@@ -4293,7 +4243,7 @@ export namespace Prisma {
     createdAt: Date | null
     senderId: number | null
     dialogId: number | null
-    isRead: boolean | null
+    status: $Enums.Status | null
   }
 
   export type MessageCountAggregateOutputType = {
@@ -4302,7 +4252,8 @@ export namespace Prisma {
     createdAt: number
     senderId: number
     dialogId: number
-    isRead: number
+    unreadById: number
+    status: number
     _all: number
   }
 
@@ -4311,12 +4262,14 @@ export namespace Prisma {
     id?: true
     senderId?: true
     dialogId?: true
+    unreadById?: true
   }
 
   export type MessageSumAggregateInputType = {
     id?: true
     senderId?: true
     dialogId?: true
+    unreadById?: true
   }
 
   export type MessageMinAggregateInputType = {
@@ -4325,7 +4278,7 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     dialogId?: true
-    isRead?: true
+    status?: true
   }
 
   export type MessageMaxAggregateInputType = {
@@ -4334,7 +4287,7 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     dialogId?: true
-    isRead?: true
+    status?: true
   }
 
   export type MessageCountAggregateInputType = {
@@ -4343,7 +4296,8 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     dialogId?: true
-    isRead?: true
+    unreadById?: true
+    status?: true
     _all?: true
   }
 
@@ -4439,7 +4393,8 @@ export namespace Prisma {
     createdAt: Date
     senderId: number
     dialogId: number
-    isRead: boolean
+    unreadById: number[]
+    status: $Enums.Status
     _count: MessageCountAggregateOutputType | null
     _avg: MessageAvgAggregateOutputType | null
     _sum: MessageSumAggregateOutputType | null
@@ -4467,9 +4422,10 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     dialogId?: boolean
-    isRead?: boolean
+    unreadById?: boolean
+    status?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
-    Dialog?: boolean | DialogDefaultArgs<ExtArgs>
+    dialog?: boolean | DialogDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectScalar = {
@@ -4478,12 +4434,13 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     dialogId?: boolean
-    isRead?: boolean
+    unreadById?: boolean
+    status?: boolean
   }
 
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sender?: boolean | UserDefaultArgs<ExtArgs>
-    Dialog?: boolean | DialogDefaultArgs<ExtArgs>
+    dialog?: boolean | DialogDefaultArgs<ExtArgs>
   }
 
 
@@ -4491,7 +4448,7 @@ export namespace Prisma {
     name: "Message"
     objects: {
       sender: Prisma.$UserPayload<ExtArgs>
-      Dialog: Prisma.$DialogPayload<ExtArgs>
+      dialog: Prisma.$DialogPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4499,7 +4456,8 @@ export namespace Prisma {
       createdAt: Date
       senderId: number
       dialogId: number
-      isRead: boolean
+      unreadById: number[]
+      status: $Enums.Status
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -4867,7 +4825,7 @@ export namespace Prisma {
 
     sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    Dialog<T extends DialogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DialogDefaultArgs<ExtArgs>>): Prisma__DialogClient<$Result.GetResult<Prisma.$DialogPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    dialog<T extends DialogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DialogDefaultArgs<ExtArgs>>): Prisma__DialogClient<$Result.GetResult<Prisma.$DialogPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4902,7 +4860,8 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Message", 'DateTime'>
     readonly senderId: FieldRef<"Message", 'Int'>
     readonly dialogId: FieldRef<"Message", 'Int'>
-    readonly isRead: FieldRef<"Message", 'Boolean'>
+    readonly unreadById: FieldRef<"Message", 'Int[]'>
+    readonly status: FieldRef<"Message", 'Status'>
   }
     
 
@@ -5251,31 +5210,32 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     createdAt: 'createdAt',
-    pictureUrl: 'pictureUrl',
-    dialogId: 'dialogId'
+    pictureUrl: 'pictureUrl'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const Named_dialogScalarFieldEnum: {
+  export const DialogScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    pictureUrl: 'pictureUrl',
+    isGroup: 'isGroup',
+    sentTime: 'sentTime',
+    lastMessage: 'lastMessage'
+  };
+
+  export type DialogScalarFieldEnum = (typeof DialogScalarFieldEnum)[keyof typeof DialogScalarFieldEnum]
+
+
+  export const Dialog_participantScalarFieldEnum: {
+    name: 'name',
+    pictureUrl: 'pictureUrl',
     dialogId: 'dialogId',
     userId: 'userId'
   };
 
-  export type Named_dialogScalarFieldEnum = (typeof Named_dialogScalarFieldEnum)[keyof typeof Named_dialogScalarFieldEnum]
-
-
-  export const DialogScalarFieldEnum: {
-    id: 'id',
-    pictureUrl: 'pictureUrl',
-    lastMessage: 'lastMessage',
-    sentTime: 'sentTime'
-  };
-
-  export type DialogScalarFieldEnum = (typeof DialogScalarFieldEnum)[keyof typeof DialogScalarFieldEnum]
+  export type Dialog_participantScalarFieldEnum = (typeof Dialog_participantScalarFieldEnum)[keyof typeof Dialog_participantScalarFieldEnum]
 
 
   export const MessageScalarFieldEnum: {
@@ -5284,7 +5244,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     senderId: 'senderId',
     dialogId: 'dialogId',
-    isRead: 'isRead'
+    unreadById: 'unreadById',
+    status: 'status'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -5369,6 +5330,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status[]'
+   */
+  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5395,11 +5370,9 @@ export namespace Prisma {
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    pictureUrl?: StringFilter<"User"> | string
-    dialogId?: IntNullableFilter<"User"> | number | null
-    dialogs?: Named_dialogListRelationFilter
-    Message?: MessageListRelationFilter
-    Dialog?: XOR<DialogNullableRelationFilter, DialogWhereInput> | null
+    pictureUrl?: StringNullableFilter<"User"> | string | null
+    dialog_participant?: Dialog_participantListRelationFilter
+    message?: MessageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5409,11 +5382,9 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
-    pictureUrl?: SortOrder
-    dialogId?: SortOrderInput | SortOrder
-    dialogs?: Named_dialogOrderByRelationAggregateInput
-    Message?: MessageOrderByRelationAggregateInput
-    Dialog?: DialogOrderByWithRelationInput
+    pictureUrl?: SortOrderInput | SortOrder
+    dialog_participant?: Dialog_participantOrderByRelationAggregateInput
+    message?: MessageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5426,11 +5397,9 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    pictureUrl?: StringFilter<"User"> | string
-    dialogId?: IntNullableFilter<"User"> | number | null
-    dialogs?: Named_dialogListRelationFilter
-    Message?: MessageListRelationFilter
-    Dialog?: XOR<DialogNullableRelationFilter, DialogWhereInput> | null
+    pictureUrl?: StringNullableFilter<"User"> | string | null
+    dialog_participant?: Dialog_participantListRelationFilter
+    message?: MessageListRelationFilter
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -5440,8 +5409,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
-    pictureUrl?: SortOrder
-    dialogId?: SortOrderInput | SortOrder
+    pictureUrl?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5459,63 +5427,7 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    pictureUrl?: StringWithAggregatesFilter<"User"> | string
-    dialogId?: IntNullableWithAggregatesFilter<"User"> | number | null
-  }
-
-  export type Named_dialogWhereInput = {
-    AND?: Named_dialogWhereInput | Named_dialogWhereInput[]
-    OR?: Named_dialogWhereInput[]
-    NOT?: Named_dialogWhereInput | Named_dialogWhereInput[]
-    id?: IntFilter<"Named_dialog"> | number
-    name?: StringFilter<"Named_dialog"> | string
-    dialogId?: IntFilter<"Named_dialog"> | number
-    userId?: IntNullableFilter<"Named_dialog"> | number | null
-    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
-    User?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-  }
-
-  export type Named_dialogOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    dialog?: DialogOrderByWithRelationInput
-    User?: UserOrderByWithRelationInput
-  }
-
-  export type Named_dialogWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: Named_dialogWhereInput | Named_dialogWhereInput[]
-    OR?: Named_dialogWhereInput[]
-    NOT?: Named_dialogWhereInput | Named_dialogWhereInput[]
-    name?: StringFilter<"Named_dialog"> | string
-    dialogId?: IntFilter<"Named_dialog"> | number
-    userId?: IntNullableFilter<"Named_dialog"> | number | null
-    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
-    User?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-  }, "id">
-
-  export type Named_dialogOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    _count?: Named_dialogCountOrderByAggregateInput
-    _avg?: Named_dialogAvgOrderByAggregateInput
-    _max?: Named_dialogMaxOrderByAggregateInput
-    _min?: Named_dialogMinOrderByAggregateInput
-    _sum?: Named_dialogSumOrderByAggregateInput
-  }
-
-  export type Named_dialogScalarWhereWithAggregatesInput = {
-    AND?: Named_dialogScalarWhereWithAggregatesInput | Named_dialogScalarWhereWithAggregatesInput[]
-    OR?: Named_dialogScalarWhereWithAggregatesInput[]
-    NOT?: Named_dialogScalarWhereWithAggregatesInput | Named_dialogScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Named_dialog"> | number
-    name?: StringWithAggregatesFilter<"Named_dialog"> | string
-    dialogId?: IntWithAggregatesFilter<"Named_dialog"> | number
-    userId?: IntNullableWithAggregatesFilter<"Named_dialog"> | number | null
+    pictureUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type DialogWhereInput = {
@@ -5523,22 +5435,24 @@ export namespace Prisma {
     OR?: DialogWhereInput[]
     NOT?: DialogWhereInput | DialogWhereInput[]
     id?: IntFilter<"Dialog"> | number
+    name?: StringNullableFilter<"Dialog"> | string | null
     pictureUrl?: StringNullableFilter<"Dialog"> | string | null
-    lastMessage?: StringNullableFilter<"Dialog"> | string | null
+    isGroup?: BoolFilter<"Dialog"> | boolean
     sentTime?: DateTimeNullableFilter<"Dialog"> | Date | string | null
-    users_id?: UserListRelationFilter
+    lastMessage?: StringNullableFilter<"Dialog"> | string | null
     messages?: MessageListRelationFilter
-    named_dialogs?: Named_dialogListRelationFilter
+    dialog_participants?: Dialog_participantListRelationFilter
   }
 
   export type DialogOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrderInput | SortOrder
     pictureUrl?: SortOrderInput | SortOrder
-    lastMessage?: SortOrderInput | SortOrder
+    isGroup?: SortOrder
     sentTime?: SortOrderInput | SortOrder
-    users_id?: UserOrderByRelationAggregateInput
+    lastMessage?: SortOrderInput | SortOrder
     messages?: MessageOrderByRelationAggregateInput
-    named_dialogs?: Named_dialogOrderByRelationAggregateInput
+    dialog_participants?: Dialog_participantOrderByRelationAggregateInput
   }
 
   export type DialogWhereUniqueInput = Prisma.AtLeast<{
@@ -5546,19 +5460,22 @@ export namespace Prisma {
     AND?: DialogWhereInput | DialogWhereInput[]
     OR?: DialogWhereInput[]
     NOT?: DialogWhereInput | DialogWhereInput[]
+    name?: StringNullableFilter<"Dialog"> | string | null
     pictureUrl?: StringNullableFilter<"Dialog"> | string | null
-    lastMessage?: StringNullableFilter<"Dialog"> | string | null
+    isGroup?: BoolFilter<"Dialog"> | boolean
     sentTime?: DateTimeNullableFilter<"Dialog"> | Date | string | null
-    users_id?: UserListRelationFilter
+    lastMessage?: StringNullableFilter<"Dialog"> | string | null
     messages?: MessageListRelationFilter
-    named_dialogs?: Named_dialogListRelationFilter
+    dialog_participants?: Dialog_participantListRelationFilter
   }, "id">
 
   export type DialogOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrderInput | SortOrder
     pictureUrl?: SortOrderInput | SortOrder
-    lastMessage?: SortOrderInput | SortOrder
+    isGroup?: SortOrder
     sentTime?: SortOrderInput | SortOrder
+    lastMessage?: SortOrderInput | SortOrder
     _count?: DialogCountOrderByAggregateInput
     _avg?: DialogAvgOrderByAggregateInput
     _max?: DialogMaxOrderByAggregateInput
@@ -5571,9 +5488,67 @@ export namespace Prisma {
     OR?: DialogScalarWhereWithAggregatesInput[]
     NOT?: DialogScalarWhereWithAggregatesInput | DialogScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Dialog"> | number
+    name?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
     pictureUrl?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
-    lastMessage?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
+    isGroup?: BoolWithAggregatesFilter<"Dialog"> | boolean
     sentTime?: DateTimeNullableWithAggregatesFilter<"Dialog"> | Date | string | null
+    lastMessage?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
+  }
+
+  export type Dialog_participantWhereInput = {
+    AND?: Dialog_participantWhereInput | Dialog_participantWhereInput[]
+    OR?: Dialog_participantWhereInput[]
+    NOT?: Dialog_participantWhereInput | Dialog_participantWhereInput[]
+    name?: StringFilter<"Dialog_participant"> | string
+    pictureUrl?: StringNullableFilter<"Dialog_participant"> | string | null
+    dialogId?: IntFilter<"Dialog_participant"> | number
+    userId?: IntFilter<"Dialog_participant"> | number
+    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type Dialog_participantOrderByWithRelationInput = {
+    name?: SortOrder
+    pictureUrl?: SortOrderInput | SortOrder
+    dialogId?: SortOrder
+    userId?: SortOrder
+    dialog?: DialogOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type Dialog_participantWhereUniqueInput = Prisma.AtLeast<{
+    dialogId_userId?: Dialog_participantDialogIdUserIdCompoundUniqueInput
+    AND?: Dialog_participantWhereInput | Dialog_participantWhereInput[]
+    OR?: Dialog_participantWhereInput[]
+    NOT?: Dialog_participantWhereInput | Dialog_participantWhereInput[]
+    name?: StringFilter<"Dialog_participant"> | string
+    pictureUrl?: StringNullableFilter<"Dialog_participant"> | string | null
+    dialogId?: IntFilter<"Dialog_participant"> | number
+    userId?: IntFilter<"Dialog_participant"> | number
+    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "dialogId_userId">
+
+  export type Dialog_participantOrderByWithAggregationInput = {
+    name?: SortOrder
+    pictureUrl?: SortOrderInput | SortOrder
+    dialogId?: SortOrder
+    userId?: SortOrder
+    _count?: Dialog_participantCountOrderByAggregateInput
+    _avg?: Dialog_participantAvgOrderByAggregateInput
+    _max?: Dialog_participantMaxOrderByAggregateInput
+    _min?: Dialog_participantMinOrderByAggregateInput
+    _sum?: Dialog_participantSumOrderByAggregateInput
+  }
+
+  export type Dialog_participantScalarWhereWithAggregatesInput = {
+    AND?: Dialog_participantScalarWhereWithAggregatesInput | Dialog_participantScalarWhereWithAggregatesInput[]
+    OR?: Dialog_participantScalarWhereWithAggregatesInput[]
+    NOT?: Dialog_participantScalarWhereWithAggregatesInput | Dialog_participantScalarWhereWithAggregatesInput[]
+    name?: StringWithAggregatesFilter<"Dialog_participant"> | string
+    pictureUrl?: StringNullableWithAggregatesFilter<"Dialog_participant"> | string | null
+    dialogId?: IntWithAggregatesFilter<"Dialog_participant"> | number
+    userId?: IntWithAggregatesFilter<"Dialog_participant"> | number
   }
 
   export type MessageWhereInput = {
@@ -5585,9 +5560,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     dialogId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
+    unreadById?: IntNullableListFilter<"Message">
+    status?: EnumStatusFilter<"Message"> | $Enums.Status
     sender?: XOR<UserRelationFilter, UserWhereInput>
-    Dialog?: XOR<DialogRelationFilter, DialogWhereInput>
+    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -5596,9 +5572,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
-    isRead?: SortOrder
+    unreadById?: SortOrder
+    status?: SortOrder
     sender?: UserOrderByWithRelationInput
-    Dialog?: DialogOrderByWithRelationInput
+    dialog?: DialogOrderByWithRelationInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -5610,9 +5587,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     dialogId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
+    unreadById?: IntNullableListFilter<"Message">
+    status?: EnumStatusFilter<"Message"> | $Enums.Status
     sender?: XOR<UserRelationFilter, UserWhereInput>
-    Dialog?: XOR<DialogRelationFilter, DialogWhereInput>
+    dialog?: XOR<DialogRelationFilter, DialogWhereInput>
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
@@ -5621,7 +5599,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
-    isRead?: SortOrder
+    unreadById?: SortOrder
+    status?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _avg?: MessageAvgOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
@@ -5638,7 +5617,8 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     senderId?: IntWithAggregatesFilter<"Message"> | number
     dialogId?: IntWithAggregatesFilter<"Message"> | number
-    isRead?: BoolWithAggregatesFilter<"Message"> | boolean
+    unreadById?: IntNullableListFilter<"Message">
+    status?: EnumStatusWithAggregatesFilter<"Message"> | $Enums.Status
   }
 
   export type UserCreateInput = {
@@ -5647,10 +5627,9 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    pictureUrl: string
-    dialogs?: Named_dialogCreateNestedManyWithoutUserInput
-    Message?: MessageCreateNestedManyWithoutSenderInput
-    Dialog?: DialogCreateNestedOneWithoutUsers_idInput
+    pictureUrl?: string | null
+    dialog_participant?: Dialog_participantCreateNestedManyWithoutUserInput
+    message?: MessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -5660,10 +5639,9 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    pictureUrl: string
-    dialogId?: number | null
-    dialogs?: Named_dialogUncheckedCreateNestedManyWithoutUserInput
-    Message?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    pictureUrl?: string | null
+    dialog_participant?: Dialog_participantUncheckedCreateNestedManyWithoutUserInput
+    message?: MessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserUpdateInput = {
@@ -5672,10 +5650,9 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogs?: Named_dialogUpdateManyWithoutUserNestedInput
-    Message?: MessageUpdateManyWithoutSenderNestedInput
-    Dialog?: DialogUpdateOneWithoutUsers_idNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participant?: Dialog_participantUpdateManyWithoutUserNestedInput
+    message?: MessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -5685,10 +5662,9 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogId?: NullableIntFieldUpdateOperationsInput | number | null
-    dialogs?: Named_dialogUncheckedUpdateManyWithoutUserNestedInput
-    Message?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participant?: Dialog_participantUncheckedUpdateManyWithoutUserNestedInput
+    message?: MessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -5698,8 +5674,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    pictureUrl: string
-    dialogId?: number | null
+    pictureUrl?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -5708,7 +5683,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -5718,118 +5693,131 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type Named_dialogCreateInput = {
-    name: string
-    dialog: DialogCreateNestedOneWithoutNamed_dialogsInput
-    User?: UserCreateNestedOneWithoutDialogsInput
-  }
-
-  export type Named_dialogUncheckedCreateInput = {
-    id?: number
-    name: string
-    dialogId: number
-    userId?: number | null
-  }
-
-  export type Named_dialogUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    dialog?: DialogUpdateOneRequiredWithoutNamed_dialogsNestedInput
-    User?: UserUpdateOneWithoutDialogsNestedInput
-  }
-
-  export type Named_dialogUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    dialogId?: IntFieldUpdateOperationsInput | number
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type Named_dialogCreateManyInput = {
-    id?: number
-    name: string
-    dialogId: number
-    userId?: number | null
-  }
-
-  export type Named_dialogUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type Named_dialogUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    dialogId?: IntFieldUpdateOperationsInput | number
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DialogCreateInput = {
+    name?: string | null
     pictureUrl?: string | null
-    lastMessage?: string | null
+    isGroup?: boolean
     sentTime?: Date | string | null
-    users_id?: UserCreateNestedManyWithoutDialogInput
+    lastMessage?: string | null
     messages?: MessageCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
+    dialog_participants?: Dialog_participantCreateNestedManyWithoutDialogInput
   }
 
   export type DialogUncheckedCreateInput = {
     id?: number
+    name?: string | null
     pictureUrl?: string | null
-    lastMessage?: string | null
+    isGroup?: boolean
     sentTime?: Date | string | null
-    users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
+    lastMessage?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
+    dialog_participants?: Dialog_participantUncheckedCreateNestedManyWithoutDialogInput
   }
 
   export type DialogUpdateInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUpdateManyWithoutDialogNestedInput
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
+    dialog_participants?: Dialog_participantUpdateManyWithoutDialogNestedInput
   }
 
   export type DialogUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
+    dialog_participants?: Dialog_participantUncheckedUpdateManyWithoutDialogNestedInput
   }
 
   export type DialogCreateManyInput = {
     id?: number
+    name?: string | null
     pictureUrl?: string | null
-    lastMessage?: string | null
+    isGroup?: boolean
     sentTime?: Date | string | null
+    lastMessage?: string | null
   }
 
   export type DialogUpdateManyMutationInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DialogUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Dialog_participantCreateInput = {
+    name: string
+    pictureUrl?: string | null
+    dialog: DialogCreateNestedOneWithoutDialog_participantsInput
+    user: UserCreateNestedOneWithoutDialog_participantInput
+  }
+
+  export type Dialog_participantUncheckedCreateInput = {
+    name: string
+    pictureUrl?: string | null
+    dialogId: number
+    userId: number
+  }
+
+  export type Dialog_participantUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog?: DialogUpdateOneRequiredWithoutDialog_participantsNestedInput
+    user?: UserUpdateOneRequiredWithoutDialog_participantNestedInput
+  }
+
+  export type Dialog_participantUncheckedUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialogId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type Dialog_participantCreateManyInput = {
+    name: string
+    pictureUrl?: string | null
+    dialogId: number
+    userId: number
+  }
+
+  export type Dialog_participantUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Dialog_participantUncheckedUpdateManyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialogId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MessageCreateInput = {
     text: string
     createdAt?: Date | string
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
     sender: UserCreateNestedOneWithoutMessageInput
-    Dialog: DialogCreateNestedOneWithoutMessagesInput
+    dialog: DialogCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -5838,15 +5826,17 @@ export namespace Prisma {
     createdAt?: Date | string
     senderId: number
     dialogId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
   export type MessageUpdateInput = {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     sender?: UserUpdateOneRequiredWithoutMessageNestedInput
-    Dialog?: DialogUpdateOneRequiredWithoutMessagesNestedInput
+    dialog?: DialogUpdateOneRequiredWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -5855,7 +5845,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
     dialogId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type MessageCreateManyInput = {
@@ -5864,13 +5855,15 @@ export namespace Prisma {
     createdAt?: Date | string
     senderId: number
     dialogId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
   export type MessageUpdateManyMutationInput = {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type MessageUncheckedUpdateManyInput = {
@@ -5879,7 +5872,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
     dialogId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5934,21 +5928,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type Named_dialogListRelationFilter = {
-    every?: Named_dialogWhereInput
-    some?: Named_dialogWhereInput
-    none?: Named_dialogWhereInput
+  export type Dialog_participantListRelationFilter = {
+    every?: Dialog_participantWhereInput
+    some?: Dialog_participantWhereInput
+    none?: Dialog_participantWhereInput
   }
 
   export type MessageListRelationFilter = {
@@ -5957,17 +5940,12 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
-  export type DialogNullableRelationFilter = {
-    is?: DialogWhereInput | null
-    isNot?: DialogWhereInput | null
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
-  export type Named_dialogOrderByRelationAggregateInput = {
+  export type Dialog_participantOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5983,12 +5961,10 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     pictureUrl?: SortOrder
-    dialogId?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    dialogId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5999,7 +5975,6 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     pictureUrl?: SortOrder
-    dialogId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6010,12 +5985,10 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     pictureUrl?: SortOrder
-    dialogId?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    dialogId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -6084,63 +6057,9 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type DialogRelationFilter = {
-    is?: DialogWhereInput
-    isNot?: DialogWhereInput
-  }
-
-  export type UserNullableRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type Named_dialogCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type Named_dialogAvgOrderByAggregateInput = {
-    id?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type Named_dialogMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type Named_dialogMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type Named_dialogSumOrderByAggregateInput = {
-    id?: SortOrder
-    dialogId?: SortOrder
-    userId?: SortOrder
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -6154,21 +6073,13 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type DialogCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     pictureUrl?: SortOrder
-    lastMessage?: SortOrder
+    isGroup?: SortOrder
     sentTime?: SortOrder
+    lastMessage?: SortOrder
   }
 
   export type DialogAvgOrderByAggregateInput = {
@@ -6177,20 +6088,32 @@ export namespace Prisma {
 
   export type DialogMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     pictureUrl?: SortOrder
-    lastMessage?: SortOrder
+    isGroup?: SortOrder
     sentTime?: SortOrder
+    lastMessage?: SortOrder
   }
 
   export type DialogMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     pictureUrl?: SortOrder
-    lastMessage?: SortOrder
+    isGroup?: SortOrder
     sentTime?: SortOrder
+    lastMessage?: SortOrder
   }
 
   export type DialogSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6207,14 +6130,65 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type DialogRelationFilter = {
+    is?: DialogWhereInput
+    isNot?: DialogWhereInput
   }
 
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type Dialog_participantDialogIdUserIdCompoundUniqueInput = {
+    dialogId: number
+    userId: number
+  }
+
+  export type Dialog_participantCountOrderByAggregateInput = {
+    name?: SortOrder
+    pictureUrl?: SortOrder
+    dialogId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type Dialog_participantAvgOrderByAggregateInput = {
+    dialogId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type Dialog_participantMaxOrderByAggregateInput = {
+    name?: SortOrder
+    pictureUrl?: SortOrder
+    dialogId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type Dialog_participantMinOrderByAggregateInput = {
+    name?: SortOrder
+    pictureUrl?: SortOrder
+    dialogId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type Dialog_participantSumOrderByAggregateInput = {
+    dialogId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
   export type MessageCountOrderByAggregateInput = {
@@ -6223,13 +6197,15 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
-    isRead?: SortOrder
+    unreadById?: SortOrder
+    status?: SortOrder
   }
 
   export type MessageAvgOrderByAggregateInput = {
     id?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
+    unreadById?: SortOrder
   }
 
   export type MessageMaxOrderByAggregateInput = {
@@ -6238,7 +6214,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
-    isRead?: SortOrder
+    status?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
@@ -6247,28 +6223,31 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
-    isRead?: SortOrder
+    status?: SortOrder
   }
 
   export type MessageSumOrderByAggregateInput = {
     id?: SortOrder
     senderId?: SortOrder
     dialogId?: SortOrder
+    unreadById?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
-  export type Named_dialogCreateNestedManyWithoutUserInput = {
-    create?: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput> | Named_dialogCreateWithoutUserInput[] | Named_dialogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutUserInput | Named_dialogCreateOrConnectWithoutUserInput[]
-    createMany?: Named_dialogCreateManyUserInputEnvelope
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
+  export type Dialog_participantCreateNestedManyWithoutUserInput = {
+    create?: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput> | Dialog_participantCreateWithoutUserInput[] | Dialog_participantUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutUserInput | Dialog_participantCreateOrConnectWithoutUserInput[]
+    createMany?: Dialog_participantCreateManyUserInputEnvelope
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
   }
 
   export type MessageCreateNestedManyWithoutSenderInput = {
@@ -6278,17 +6257,11 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type DialogCreateNestedOneWithoutUsers_idInput = {
-    create?: XOR<DialogCreateWithoutUsers_idInput, DialogUncheckedCreateWithoutUsers_idInput>
-    connectOrCreate?: DialogCreateOrConnectWithoutUsers_idInput
-    connect?: DialogWhereUniqueInput
-  }
-
-  export type Named_dialogUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput> | Named_dialogCreateWithoutUserInput[] | Named_dialogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutUserInput | Named_dialogCreateOrConnectWithoutUserInput[]
-    createMany?: Named_dialogCreateManyUserInputEnvelope
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
+  export type Dialog_participantUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput> | Dialog_participantCreateWithoutUserInput[] | Dialog_participantUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutUserInput | Dialog_participantCreateOrConnectWithoutUserInput[]
+    createMany?: Dialog_participantCreateManyUserInputEnvelope
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
   }
 
   export type MessageUncheckedCreateNestedManyWithoutSenderInput = {
@@ -6310,18 +6283,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type Named_dialogUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput> | Named_dialogCreateWithoutUserInput[] | Named_dialogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutUserInput | Named_dialogCreateOrConnectWithoutUserInput[]
-    upsert?: Named_dialogUpsertWithWhereUniqueWithoutUserInput | Named_dialogUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: Named_dialogCreateManyUserInputEnvelope
-    set?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    disconnect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    delete?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    update?: Named_dialogUpdateWithWhereUniqueWithoutUserInput | Named_dialogUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: Named_dialogUpdateManyWithWhereWithoutUserInput | Named_dialogUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
+  export type Dialog_participantUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput> | Dialog_participantCreateWithoutUserInput[] | Dialog_participantUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutUserInput | Dialog_participantCreateOrConnectWithoutUserInput[]
+    upsert?: Dialog_participantUpsertWithWhereUniqueWithoutUserInput | Dialog_participantUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: Dialog_participantCreateManyUserInputEnvelope
+    set?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    disconnect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    delete?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    update?: Dialog_participantUpdateWithWhereUniqueWithoutUserInput | Dialog_participantUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: Dialog_participantUpdateManyWithWhereWithoutUserInput | Dialog_participantUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
   }
 
   export type MessageUpdateManyWithoutSenderNestedInput = {
@@ -6338,16 +6311,6 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type DialogUpdateOneWithoutUsers_idNestedInput = {
-    create?: XOR<DialogCreateWithoutUsers_idInput, DialogUncheckedCreateWithoutUsers_idInput>
-    connectOrCreate?: DialogCreateOrConnectWithoutUsers_idInput
-    upsert?: DialogUpsertWithoutUsers_idInput
-    disconnect?: DialogWhereInput | boolean
-    delete?: DialogWhereInput | boolean
-    connect?: DialogWhereUniqueInput
-    update?: XOR<XOR<DialogUpdateToOneWithWhereWithoutUsers_idInput, DialogUpdateWithoutUsers_idInput>, DialogUncheckedUpdateWithoutUsers_idInput>
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6356,26 +6319,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type Named_dialogUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput> | Named_dialogCreateWithoutUserInput[] | Named_dialogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutUserInput | Named_dialogCreateOrConnectWithoutUserInput[]
-    upsert?: Named_dialogUpsertWithWhereUniqueWithoutUserInput | Named_dialogUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: Named_dialogCreateManyUserInputEnvelope
-    set?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    disconnect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    delete?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    update?: Named_dialogUpdateWithWhereUniqueWithoutUserInput | Named_dialogUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: Named_dialogUpdateManyWithWhereWithoutUserInput | Named_dialogUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
+  export type Dialog_participantUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput> | Dialog_participantCreateWithoutUserInput[] | Dialog_participantUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutUserInput | Dialog_participantCreateOrConnectWithoutUserInput[]
+    upsert?: Dialog_participantUpsertWithWhereUniqueWithoutUserInput | Dialog_participantUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: Dialog_participantCreateManyUserInputEnvelope
+    set?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    disconnect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    delete?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    update?: Dialog_participantUpdateWithWhereUniqueWithoutUserInput | Dialog_participantUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: Dialog_participantUpdateManyWithWhereWithoutUserInput | Dialog_participantUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
@@ -6392,43 +6347,6 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type DialogCreateNestedOneWithoutNamed_dialogsInput = {
-    create?: XOR<DialogCreateWithoutNamed_dialogsInput, DialogUncheckedCreateWithoutNamed_dialogsInput>
-    connectOrCreate?: DialogCreateOrConnectWithoutNamed_dialogsInput
-    connect?: DialogWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutDialogsInput = {
-    create?: XOR<UserCreateWithoutDialogsInput, UserUncheckedCreateWithoutDialogsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDialogsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type DialogUpdateOneRequiredWithoutNamed_dialogsNestedInput = {
-    create?: XOR<DialogCreateWithoutNamed_dialogsInput, DialogUncheckedCreateWithoutNamed_dialogsInput>
-    connectOrCreate?: DialogCreateOrConnectWithoutNamed_dialogsInput
-    upsert?: DialogUpsertWithoutNamed_dialogsInput
-    connect?: DialogWhereUniqueInput
-    update?: XOR<XOR<DialogUpdateToOneWithWhereWithoutNamed_dialogsInput, DialogUpdateWithoutNamed_dialogsInput>, DialogUncheckedUpdateWithoutNamed_dialogsInput>
-  }
-
-  export type UserUpdateOneWithoutDialogsNestedInput = {
-    create?: XOR<UserCreateWithoutDialogsInput, UserUncheckedCreateWithoutDialogsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDialogsInput
-    upsert?: UserUpsertWithoutDialogsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDialogsInput, UserUpdateWithoutDialogsInput>, UserUncheckedUpdateWithoutDialogsInput>
-  }
-
-  export type UserCreateNestedManyWithoutDialogInput = {
-    create?: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput> | UserCreateWithoutDialogInput[] | UserUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutDialogInput | UserCreateOrConnectWithoutDialogInput[]
-    createMany?: UserCreateManyDialogInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
   export type MessageCreateNestedManyWithoutDialogInput = {
     create?: XOR<MessageCreateWithoutDialogInput, MessageUncheckedCreateWithoutDialogInput> | MessageCreateWithoutDialogInput[] | MessageUncheckedCreateWithoutDialogInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutDialogInput | MessageCreateOrConnectWithoutDialogInput[]
@@ -6436,18 +6354,11 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type Named_dialogCreateNestedManyWithoutDialogInput = {
-    create?: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput> | Named_dialogCreateWithoutDialogInput[] | Named_dialogUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutDialogInput | Named_dialogCreateOrConnectWithoutDialogInput[]
-    createMany?: Named_dialogCreateManyDialogInputEnvelope
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutDialogInput = {
-    create?: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput> | UserCreateWithoutDialogInput[] | UserUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutDialogInput | UserCreateOrConnectWithoutDialogInput[]
-    createMany?: UserCreateManyDialogInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type Dialog_participantCreateNestedManyWithoutDialogInput = {
+    create?: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput> | Dialog_participantCreateWithoutDialogInput[] | Dialog_participantUncheckedCreateWithoutDialogInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutDialogInput | Dialog_participantCreateOrConnectWithoutDialogInput[]
+    createMany?: Dialog_participantCreateManyDialogInputEnvelope
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
   }
 
   export type MessageUncheckedCreateNestedManyWithoutDialogInput = {
@@ -6457,29 +6368,19 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type Named_dialogUncheckedCreateNestedManyWithoutDialogInput = {
-    create?: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput> | Named_dialogCreateWithoutDialogInput[] | Named_dialogUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutDialogInput | Named_dialogCreateOrConnectWithoutDialogInput[]
-    createMany?: Named_dialogCreateManyDialogInputEnvelope
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
+  export type Dialog_participantUncheckedCreateNestedManyWithoutDialogInput = {
+    create?: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput> | Dialog_participantCreateWithoutDialogInput[] | Dialog_participantUncheckedCreateWithoutDialogInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutDialogInput | Dialog_participantCreateOrConnectWithoutDialogInput[]
+    createMany?: Dialog_participantCreateManyDialogInputEnvelope
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
-  }
-
-  export type UserUpdateManyWithoutDialogNestedInput = {
-    create?: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput> | UserCreateWithoutDialogInput[] | UserUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutDialogInput | UserCreateOrConnectWithoutDialogInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutDialogInput | UserUpsertWithWhereUniqueWithoutDialogInput[]
-    createMany?: UserCreateManyDialogInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutDialogInput | UserUpdateWithWhereUniqueWithoutDialogInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutDialogInput | UserUpdateManyWithWhereWithoutDialogInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type MessageUpdateManyWithoutDialogNestedInput = {
@@ -6496,32 +6397,18 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type Named_dialogUpdateManyWithoutDialogNestedInput = {
-    create?: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput> | Named_dialogCreateWithoutDialogInput[] | Named_dialogUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutDialogInput | Named_dialogCreateOrConnectWithoutDialogInput[]
-    upsert?: Named_dialogUpsertWithWhereUniqueWithoutDialogInput | Named_dialogUpsertWithWhereUniqueWithoutDialogInput[]
-    createMany?: Named_dialogCreateManyDialogInputEnvelope
-    set?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    disconnect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    delete?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    update?: Named_dialogUpdateWithWhereUniqueWithoutDialogInput | Named_dialogUpdateWithWhereUniqueWithoutDialogInput[]
-    updateMany?: Named_dialogUpdateManyWithWhereWithoutDialogInput | Named_dialogUpdateManyWithWhereWithoutDialogInput[]
-    deleteMany?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
-  }
-
-  export type UserUncheckedUpdateManyWithoutDialogNestedInput = {
-    create?: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput> | UserCreateWithoutDialogInput[] | UserUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutDialogInput | UserCreateOrConnectWithoutDialogInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutDialogInput | UserUpsertWithWhereUniqueWithoutDialogInput[]
-    createMany?: UserCreateManyDialogInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutDialogInput | UserUpdateWithWhereUniqueWithoutDialogInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutDialogInput | UserUpdateManyWithWhereWithoutDialogInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type Dialog_participantUpdateManyWithoutDialogNestedInput = {
+    create?: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput> | Dialog_participantCreateWithoutDialogInput[] | Dialog_participantUncheckedCreateWithoutDialogInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutDialogInput | Dialog_participantCreateOrConnectWithoutDialogInput[]
+    upsert?: Dialog_participantUpsertWithWhereUniqueWithoutDialogInput | Dialog_participantUpsertWithWhereUniqueWithoutDialogInput[]
+    createMany?: Dialog_participantCreateManyDialogInputEnvelope
+    set?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    disconnect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    delete?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    update?: Dialog_participantUpdateWithWhereUniqueWithoutDialogInput | Dialog_participantUpdateWithWhereUniqueWithoutDialogInput[]
+    updateMany?: Dialog_participantUpdateManyWithWhereWithoutDialogInput | Dialog_participantUpdateManyWithWhereWithoutDialogInput[]
+    deleteMany?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
   }
 
   export type MessageUncheckedUpdateManyWithoutDialogNestedInput = {
@@ -6538,18 +6425,50 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type Named_dialogUncheckedUpdateManyWithoutDialogNestedInput = {
-    create?: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput> | Named_dialogCreateWithoutDialogInput[] | Named_dialogUncheckedCreateWithoutDialogInput[]
-    connectOrCreate?: Named_dialogCreateOrConnectWithoutDialogInput | Named_dialogCreateOrConnectWithoutDialogInput[]
-    upsert?: Named_dialogUpsertWithWhereUniqueWithoutDialogInput | Named_dialogUpsertWithWhereUniqueWithoutDialogInput[]
-    createMany?: Named_dialogCreateManyDialogInputEnvelope
-    set?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    disconnect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    delete?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    connect?: Named_dialogWhereUniqueInput | Named_dialogWhereUniqueInput[]
-    update?: Named_dialogUpdateWithWhereUniqueWithoutDialogInput | Named_dialogUpdateWithWhereUniqueWithoutDialogInput[]
-    updateMany?: Named_dialogUpdateManyWithWhereWithoutDialogInput | Named_dialogUpdateManyWithWhereWithoutDialogInput[]
-    deleteMany?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
+  export type Dialog_participantUncheckedUpdateManyWithoutDialogNestedInput = {
+    create?: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput> | Dialog_participantCreateWithoutDialogInput[] | Dialog_participantUncheckedCreateWithoutDialogInput[]
+    connectOrCreate?: Dialog_participantCreateOrConnectWithoutDialogInput | Dialog_participantCreateOrConnectWithoutDialogInput[]
+    upsert?: Dialog_participantUpsertWithWhereUniqueWithoutDialogInput | Dialog_participantUpsertWithWhereUniqueWithoutDialogInput[]
+    createMany?: Dialog_participantCreateManyDialogInputEnvelope
+    set?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    disconnect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    delete?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    connect?: Dialog_participantWhereUniqueInput | Dialog_participantWhereUniqueInput[]
+    update?: Dialog_participantUpdateWithWhereUniqueWithoutDialogInput | Dialog_participantUpdateWithWhereUniqueWithoutDialogInput[]
+    updateMany?: Dialog_participantUpdateManyWithWhereWithoutDialogInput | Dialog_participantUpdateManyWithWhereWithoutDialogInput[]
+    deleteMany?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
+  }
+
+  export type DialogCreateNestedOneWithoutDialog_participantsInput = {
+    create?: XOR<DialogCreateWithoutDialog_participantsInput, DialogUncheckedCreateWithoutDialog_participantsInput>
+    connectOrCreate?: DialogCreateOrConnectWithoutDialog_participantsInput
+    connect?: DialogWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDialog_participantInput = {
+    create?: XOR<UserCreateWithoutDialog_participantInput, UserUncheckedCreateWithoutDialog_participantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDialog_participantInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DialogUpdateOneRequiredWithoutDialog_participantsNestedInput = {
+    create?: XOR<DialogCreateWithoutDialog_participantsInput, DialogUncheckedCreateWithoutDialog_participantsInput>
+    connectOrCreate?: DialogCreateOrConnectWithoutDialog_participantsInput
+    upsert?: DialogUpsertWithoutDialog_participantsInput
+    connect?: DialogWhereUniqueInput
+    update?: XOR<XOR<DialogUpdateToOneWithWhereWithoutDialog_participantsInput, DialogUpdateWithoutDialog_participantsInput>, DialogUncheckedUpdateWithoutDialog_participantsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDialog_participantNestedInput = {
+    create?: XOR<UserCreateWithoutDialog_participantInput, UserUncheckedCreateWithoutDialog_participantInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDialog_participantInput
+    upsert?: UserUpsertWithoutDialog_participantInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDialog_participantInput, UserUpdateWithoutDialog_participantInput>, UserUncheckedUpdateWithoutDialog_participantInput>
+  }
+
+  export type MessageCreateunreadByIdInput = {
+    set: number[]
   }
 
   export type UserCreateNestedOneWithoutMessageInput = {
@@ -6564,8 +6483,13 @@ export namespace Prisma {
     connect?: DialogWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type MessageUpdateunreadByIdInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
   }
 
   export type UserUpdateOneRequiredWithoutMessageNestedInput = {
@@ -6634,17 +6558,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -6689,6 +6602,17 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6720,31 +6644,9 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -6756,6 +6658,14 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6772,45 +6682,51 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
-  export type Named_dialogCreateWithoutUserInput = {
+  export type Dialog_participantCreateWithoutUserInput = {
     name: string
-    dialog: DialogCreateNestedOneWithoutNamed_dialogsInput
+    pictureUrl?: string | null
+    dialog: DialogCreateNestedOneWithoutDialog_participantsInput
   }
 
-  export type Named_dialogUncheckedCreateWithoutUserInput = {
-    id?: number
+  export type Dialog_participantUncheckedCreateWithoutUserInput = {
     name: string
+    pictureUrl?: string | null
     dialogId: number
   }
 
-  export type Named_dialogCreateOrConnectWithoutUserInput = {
-    where: Named_dialogWhereUniqueInput
-    create: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput>
+  export type Dialog_participantCreateOrConnectWithoutUserInput = {
+    where: Dialog_participantWhereUniqueInput
+    create: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput>
   }
 
-  export type Named_dialogCreateManyUserInputEnvelope = {
-    data: Named_dialogCreateManyUserInput | Named_dialogCreateManyUserInput[]
+  export type Dialog_participantCreateManyUserInputEnvelope = {
+    data: Dialog_participantCreateManyUserInput | Dialog_participantCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
   export type MessageCreateWithoutSenderInput = {
     text: string
     createdAt?: Date | string
-    isRead?: boolean
-    Dialog: DialogCreateNestedOneWithoutMessagesInput
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
+    dialog: DialogCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateWithoutSenderInput = {
@@ -6818,7 +6734,8 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     dialogId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
   export type MessageCreateOrConnectWithoutSenderInput = {
@@ -6831,52 +6748,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type DialogCreateWithoutUsers_idInput = {
-    pictureUrl?: string | null
-    lastMessage?: string | null
-    sentTime?: Date | string | null
-    messages?: MessageCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
+  export type Dialog_participantUpsertWithWhereUniqueWithoutUserInput = {
+    where: Dialog_participantWhereUniqueInput
+    update: XOR<Dialog_participantUpdateWithoutUserInput, Dialog_participantUncheckedUpdateWithoutUserInput>
+    create: XOR<Dialog_participantCreateWithoutUserInput, Dialog_participantUncheckedCreateWithoutUserInput>
   }
 
-  export type DialogUncheckedCreateWithoutUsers_idInput = {
-    id?: number
-    pictureUrl?: string | null
-    lastMessage?: string | null
-    sentTime?: Date | string | null
-    messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
+  export type Dialog_participantUpdateWithWhereUniqueWithoutUserInput = {
+    where: Dialog_participantWhereUniqueInput
+    data: XOR<Dialog_participantUpdateWithoutUserInput, Dialog_participantUncheckedUpdateWithoutUserInput>
   }
 
-  export type DialogCreateOrConnectWithoutUsers_idInput = {
-    where: DialogWhereUniqueInput
-    create: XOR<DialogCreateWithoutUsers_idInput, DialogUncheckedCreateWithoutUsers_idInput>
+  export type Dialog_participantUpdateManyWithWhereWithoutUserInput = {
+    where: Dialog_participantScalarWhereInput
+    data: XOR<Dialog_participantUpdateManyMutationInput, Dialog_participantUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type Named_dialogUpsertWithWhereUniqueWithoutUserInput = {
-    where: Named_dialogWhereUniqueInput
-    update: XOR<Named_dialogUpdateWithoutUserInput, Named_dialogUncheckedUpdateWithoutUserInput>
-    create: XOR<Named_dialogCreateWithoutUserInput, Named_dialogUncheckedCreateWithoutUserInput>
-  }
-
-  export type Named_dialogUpdateWithWhereUniqueWithoutUserInput = {
-    where: Named_dialogWhereUniqueInput
-    data: XOR<Named_dialogUpdateWithoutUserInput, Named_dialogUncheckedUpdateWithoutUserInput>
-  }
-
-  export type Named_dialogUpdateManyWithWhereWithoutUserInput = {
-    where: Named_dialogScalarWhereInput
-    data: XOR<Named_dialogUpdateManyMutationInput, Named_dialogUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type Named_dialogScalarWhereInput = {
-    AND?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
-    OR?: Named_dialogScalarWhereInput[]
-    NOT?: Named_dialogScalarWhereInput | Named_dialogScalarWhereInput[]
-    id?: IntFilter<"Named_dialog"> | number
-    name?: StringFilter<"Named_dialog"> | string
-    dialogId?: IntFilter<"Named_dialog"> | number
-    userId?: IntNullableFilter<"Named_dialog"> | number | null
+  export type Dialog_participantScalarWhereInput = {
+    AND?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
+    OR?: Dialog_participantScalarWhereInput[]
+    NOT?: Dialog_participantScalarWhereInput | Dialog_participantScalarWhereInput[]
+    name?: StringFilter<"Dialog_participant"> | string
+    pictureUrl?: StringNullableFilter<"Dialog_participant"> | string | null
+    dialogId?: IntFilter<"Dialog_participant"> | number
+    userId?: IntFilter<"Dialog_participant"> | number
   }
 
   export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
@@ -6904,186 +6799,15 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     dialogId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
-  }
-
-  export type DialogUpsertWithoutUsers_idInput = {
-    update: XOR<DialogUpdateWithoutUsers_idInput, DialogUncheckedUpdateWithoutUsers_idInput>
-    create: XOR<DialogCreateWithoutUsers_idInput, DialogUncheckedCreateWithoutUsers_idInput>
-    where?: DialogWhereInput
-  }
-
-  export type DialogUpdateToOneWithWhereWithoutUsers_idInput = {
-    where?: DialogWhereInput
-    data: XOR<DialogUpdateWithoutUsers_idInput, DialogUncheckedUpdateWithoutUsers_idInput>
-  }
-
-  export type DialogUpdateWithoutUsers_idInput = {
-    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    messages?: MessageUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
-  }
-
-  export type DialogUncheckedUpdateWithoutUsers_idInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
-  }
-
-  export type DialogCreateWithoutNamed_dialogsInput = {
-    pictureUrl?: string | null
-    lastMessage?: string | null
-    sentTime?: Date | string | null
-    users_id?: UserCreateNestedManyWithoutDialogInput
-    messages?: MessageCreateNestedManyWithoutDialogInput
-  }
-
-  export type DialogUncheckedCreateWithoutNamed_dialogsInput = {
-    id?: number
-    pictureUrl?: string | null
-    lastMessage?: string | null
-    sentTime?: Date | string | null
-    users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
-    messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
-  }
-
-  export type DialogCreateOrConnectWithoutNamed_dialogsInput = {
-    where: DialogWhereUniqueInput
-    create: XOR<DialogCreateWithoutNamed_dialogsInput, DialogUncheckedCreateWithoutNamed_dialogsInput>
-  }
-
-  export type UserCreateWithoutDialogsInput = {
-    name?: string | null
-    email: string
-    username: string
-    password: string
-    createdAt?: Date | string
-    pictureUrl: string
-    Message?: MessageCreateNestedManyWithoutSenderInput
-    Dialog?: DialogCreateNestedOneWithoutUsers_idInput
-  }
-
-  export type UserUncheckedCreateWithoutDialogsInput = {
-    id?: number
-    name?: string | null
-    email: string
-    username: string
-    password: string
-    createdAt?: Date | string
-    pictureUrl: string
-    dialogId?: number | null
-    Message?: MessageUncheckedCreateNestedManyWithoutSenderInput
-  }
-
-  export type UserCreateOrConnectWithoutDialogsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDialogsInput, UserUncheckedCreateWithoutDialogsInput>
-  }
-
-  export type DialogUpsertWithoutNamed_dialogsInput = {
-    update: XOR<DialogUpdateWithoutNamed_dialogsInput, DialogUncheckedUpdateWithoutNamed_dialogsInput>
-    create: XOR<DialogCreateWithoutNamed_dialogsInput, DialogUncheckedCreateWithoutNamed_dialogsInput>
-    where?: DialogWhereInput
-  }
-
-  export type DialogUpdateToOneWithWhereWithoutNamed_dialogsInput = {
-    where?: DialogWhereInput
-    data: XOR<DialogUpdateWithoutNamed_dialogsInput, DialogUncheckedUpdateWithoutNamed_dialogsInput>
-  }
-
-  export type DialogUpdateWithoutNamed_dialogsInput = {
-    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUpdateManyWithoutDialogNestedInput
-    messages?: MessageUpdateManyWithoutDialogNestedInput
-  }
-
-  export type DialogUncheckedUpdateWithoutNamed_dialogsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
-  }
-
-  export type UserUpsertWithoutDialogsInput = {
-    update: XOR<UserUpdateWithoutDialogsInput, UserUncheckedUpdateWithoutDialogsInput>
-    create: XOR<UserCreateWithoutDialogsInput, UserUncheckedCreateWithoutDialogsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDialogsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDialogsInput, UserUncheckedUpdateWithoutDialogsInput>
-  }
-
-  export type UserUpdateWithoutDialogsInput = {
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    Message?: MessageUpdateManyWithoutSenderNestedInput
-    Dialog?: DialogUpdateOneWithoutUsers_idNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDialogsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogId?: NullableIntFieldUpdateOperationsInput | number | null
-    Message?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-  }
-
-  export type UserCreateWithoutDialogInput = {
-    name?: string | null
-    email: string
-    username: string
-    password: string
-    createdAt?: Date | string
-    pictureUrl: string
-    dialogs?: Named_dialogCreateNestedManyWithoutUserInput
-    Message?: MessageCreateNestedManyWithoutSenderInput
-  }
-
-  export type UserUncheckedCreateWithoutDialogInput = {
-    id?: number
-    name?: string | null
-    email: string
-    username: string
-    password: string
-    createdAt?: Date | string
-    pictureUrl: string
-    dialogs?: Named_dialogUncheckedCreateNestedManyWithoutUserInput
-    Message?: MessageUncheckedCreateNestedManyWithoutSenderInput
-  }
-
-  export type UserCreateOrConnectWithoutDialogInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput>
-  }
-
-  export type UserCreateManyDialogInputEnvelope = {
-    data: UserCreateManyDialogInput | UserCreateManyDialogInput[]
-    skipDuplicates?: boolean
+    unreadById?: IntNullableListFilter<"Message">
+    status?: EnumStatusFilter<"Message"> | $Enums.Status
   }
 
   export type MessageCreateWithoutDialogInput = {
     text: string
     createdAt?: Date | string
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
     sender: UserCreateNestedOneWithoutMessageInput
   }
 
@@ -7092,7 +6816,8 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     senderId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
   export type MessageCreateOrConnectWithoutDialogInput = {
@@ -7105,55 +6830,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type Named_dialogCreateWithoutDialogInput = {
+  export type Dialog_participantCreateWithoutDialogInput = {
     name: string
-    User?: UserCreateNestedOneWithoutDialogsInput
+    pictureUrl?: string | null
+    user: UserCreateNestedOneWithoutDialog_participantInput
   }
 
-  export type Named_dialogUncheckedCreateWithoutDialogInput = {
-    id?: number
+  export type Dialog_participantUncheckedCreateWithoutDialogInput = {
     name: string
-    userId?: number | null
+    pictureUrl?: string | null
+    userId: number
   }
 
-  export type Named_dialogCreateOrConnectWithoutDialogInput = {
-    where: Named_dialogWhereUniqueInput
-    create: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput>
+  export type Dialog_participantCreateOrConnectWithoutDialogInput = {
+    where: Dialog_participantWhereUniqueInput
+    create: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput>
   }
 
-  export type Named_dialogCreateManyDialogInputEnvelope = {
-    data: Named_dialogCreateManyDialogInput | Named_dialogCreateManyDialogInput[]
+  export type Dialog_participantCreateManyDialogInputEnvelope = {
+    data: Dialog_participantCreateManyDialogInput | Dialog_participantCreateManyDialogInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutDialogInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutDialogInput, UserUncheckedUpdateWithoutDialogInput>
-    create: XOR<UserCreateWithoutDialogInput, UserUncheckedCreateWithoutDialogInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutDialogInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutDialogInput, UserUncheckedUpdateWithoutDialogInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutDialogInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutDialogInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: IntFilter<"User"> | number
-    name?: StringNullableFilter<"User"> | string | null
-    email?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    pictureUrl?: StringFilter<"User"> | string
-    dialogId?: IntNullableFilter<"User"> | number | null
   }
 
   export type MessageUpsertWithWhereUniqueWithoutDialogInput = {
@@ -7172,20 +6868,132 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutDialogInput>
   }
 
-  export type Named_dialogUpsertWithWhereUniqueWithoutDialogInput = {
-    where: Named_dialogWhereUniqueInput
-    update: XOR<Named_dialogUpdateWithoutDialogInput, Named_dialogUncheckedUpdateWithoutDialogInput>
-    create: XOR<Named_dialogCreateWithoutDialogInput, Named_dialogUncheckedCreateWithoutDialogInput>
+  export type Dialog_participantUpsertWithWhereUniqueWithoutDialogInput = {
+    where: Dialog_participantWhereUniqueInput
+    update: XOR<Dialog_participantUpdateWithoutDialogInput, Dialog_participantUncheckedUpdateWithoutDialogInput>
+    create: XOR<Dialog_participantCreateWithoutDialogInput, Dialog_participantUncheckedCreateWithoutDialogInput>
   }
 
-  export type Named_dialogUpdateWithWhereUniqueWithoutDialogInput = {
-    where: Named_dialogWhereUniqueInput
-    data: XOR<Named_dialogUpdateWithoutDialogInput, Named_dialogUncheckedUpdateWithoutDialogInput>
+  export type Dialog_participantUpdateWithWhereUniqueWithoutDialogInput = {
+    where: Dialog_participantWhereUniqueInput
+    data: XOR<Dialog_participantUpdateWithoutDialogInput, Dialog_participantUncheckedUpdateWithoutDialogInput>
   }
 
-  export type Named_dialogUpdateManyWithWhereWithoutDialogInput = {
-    where: Named_dialogScalarWhereInput
-    data: XOR<Named_dialogUpdateManyMutationInput, Named_dialogUncheckedUpdateManyWithoutDialogInput>
+  export type Dialog_participantUpdateManyWithWhereWithoutDialogInput = {
+    where: Dialog_participantScalarWhereInput
+    data: XOR<Dialog_participantUpdateManyMutationInput, Dialog_participantUncheckedUpdateManyWithoutDialogInput>
+  }
+
+  export type DialogCreateWithoutDialog_participantsInput = {
+    name?: string | null
+    pictureUrl?: string | null
+    isGroup?: boolean
+    sentTime?: Date | string | null
+    lastMessage?: string | null
+    messages?: MessageCreateNestedManyWithoutDialogInput
+  }
+
+  export type DialogUncheckedCreateWithoutDialog_participantsInput = {
+    id?: number
+    name?: string | null
+    pictureUrl?: string | null
+    isGroup?: boolean
+    sentTime?: Date | string | null
+    lastMessage?: string | null
+    messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
+  }
+
+  export type DialogCreateOrConnectWithoutDialog_participantsInput = {
+    where: DialogWhereUniqueInput
+    create: XOR<DialogCreateWithoutDialog_participantsInput, DialogUncheckedCreateWithoutDialog_participantsInput>
+  }
+
+  export type UserCreateWithoutDialog_participantInput = {
+    name?: string | null
+    email: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    pictureUrl?: string | null
+    message?: MessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutDialog_participantInput = {
+    id?: number
+    name?: string | null
+    email: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    pictureUrl?: string | null
+    message?: MessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutDialog_participantInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDialog_participantInput, UserUncheckedCreateWithoutDialog_participantInput>
+  }
+
+  export type DialogUpsertWithoutDialog_participantsInput = {
+    update: XOR<DialogUpdateWithoutDialog_participantsInput, DialogUncheckedUpdateWithoutDialog_participantsInput>
+    create: XOR<DialogCreateWithoutDialog_participantsInput, DialogUncheckedCreateWithoutDialog_participantsInput>
+    where?: DialogWhereInput
+  }
+
+  export type DialogUpdateToOneWithWhereWithoutDialog_participantsInput = {
+    where?: DialogWhereInput
+    data: XOR<DialogUpdateWithoutDialog_participantsInput, DialogUncheckedUpdateWithoutDialog_participantsInput>
+  }
+
+  export type DialogUpdateWithoutDialog_participantsInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    messages?: MessageUpdateManyWithoutDialogNestedInput
+  }
+
+  export type DialogUncheckedUpdateWithoutDialog_participantsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
+  }
+
+  export type UserUpsertWithoutDialog_participantInput = {
+    update: XOR<UserUpdateWithoutDialog_participantInput, UserUncheckedUpdateWithoutDialog_participantInput>
+    create: XOR<UserCreateWithoutDialog_participantInput, UserUncheckedCreateWithoutDialog_participantInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDialog_participantInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDialog_participantInput, UserUncheckedUpdateWithoutDialog_participantInput>
+  }
+
+  export type UserUpdateWithoutDialog_participantInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDialog_participantInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: MessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserCreateWithoutMessageInput = {
@@ -7194,9 +7002,8 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    pictureUrl: string
-    dialogs?: Named_dialogCreateNestedManyWithoutUserInput
-    Dialog?: DialogCreateNestedOneWithoutUsers_idInput
+    pictureUrl?: string | null
+    dialog_participant?: Dialog_participantCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessageInput = {
@@ -7206,9 +7013,8 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    pictureUrl: string
-    dialogId?: number | null
-    dialogs?: Named_dialogUncheckedCreateNestedManyWithoutUserInput
+    pictureUrl?: string | null
+    dialog_participant?: Dialog_participantUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessageInput = {
@@ -7217,20 +7023,22 @@ export namespace Prisma {
   }
 
   export type DialogCreateWithoutMessagesInput = {
+    name?: string | null
     pictureUrl?: string | null
-    lastMessage?: string | null
+    isGroup?: boolean
     sentTime?: Date | string | null
-    users_id?: UserCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
+    lastMessage?: string | null
+    dialog_participants?: Dialog_participantCreateNestedManyWithoutDialogInput
   }
 
   export type DialogUncheckedCreateWithoutMessagesInput = {
     id?: number
+    name?: string | null
     pictureUrl?: string | null
-    lastMessage?: string | null
+    isGroup?: boolean
     sentTime?: Date | string | null
-    users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
-    named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
+    lastMessage?: string | null
+    dialog_participants?: Dialog_participantUncheckedCreateNestedManyWithoutDialogInput
   }
 
   export type DialogCreateOrConnectWithoutMessagesInput = {
@@ -7255,9 +7063,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogs?: Named_dialogUpdateManyWithoutUserNestedInput
-    Dialog?: DialogUpdateOneWithoutUsers_idNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participant?: Dialog_participantUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessageInput = {
@@ -7267,9 +7074,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogId?: NullableIntFieldUpdateOperationsInput | number | null
-    dialogs?: Named_dialogUncheckedUpdateManyWithoutUserNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participant?: Dialog_participantUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DialogUpsertWithoutMessagesInput = {
@@ -7284,25 +7090,27 @@ export namespace Prisma {
   }
 
   export type DialogUpdateWithoutMessagesInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participants?: Dialog_participantUpdateManyWithoutDialogNestedInput
   }
 
   export type DialogUncheckedUpdateWithoutMessagesInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
-    named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
+    lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog_participants?: Dialog_participantUncheckedUpdateManyWithoutDialogNestedInput
   }
 
-  export type Named_dialogCreateManyUserInput = {
-    id?: number
+  export type Dialog_participantCreateManyUserInput = {
     name: string
+    pictureUrl?: string | null
     dialogId: number
   }
 
@@ -7311,31 +7119,34 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     dialogId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
-  export type Named_dialogUpdateWithoutUserInput = {
+  export type Dialog_participantUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
-    dialog?: DialogUpdateOneRequiredWithoutNamed_dialogsNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    dialog?: DialogUpdateOneRequiredWithoutDialog_participantsNestedInput
   }
 
-  export type Named_dialogUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+  export type Dialog_participantUncheckedUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     dialogId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type Named_dialogUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+  export type Dialog_participantUncheckedUpdateManyWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     dialogId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MessageUpdateWithoutSenderInput = {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-    Dialog?: DialogUpdateOneRequiredWithoutMessagesNestedInput
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    dialog?: DialogUpdateOneRequiredWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutSenderInput = {
@@ -7343,7 +7154,8 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dialogId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -7351,17 +7163,8 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dialogId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserCreateManyDialogInput = {
-    id?: number
-    name?: string | null
-    email: string
-    username: string
-    password: string
-    createdAt?: Date | string
-    pictureUrl: string
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type MessageCreateManyDialogInput = {
@@ -7369,52 +7172,21 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     senderId: number
-    isRead?: boolean
+    unreadById?: MessageCreateunreadByIdInput | number[]
+    status: $Enums.Status
   }
 
-  export type Named_dialogCreateManyDialogInput = {
-    id?: number
+  export type Dialog_participantCreateManyDialogInput = {
     name: string
-    userId?: number | null
-  }
-
-  export type UserUpdateWithoutDialogInput = {
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogs?: Named_dialogUpdateManyWithoutUserNestedInput
-    Message?: MessageUpdateManyWithoutSenderNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDialogInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
-    dialogs?: Named_dialogUncheckedUpdateManyWithoutUserNestedInput
-    Message?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutDialogInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pictureUrl?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: string | null
+    userId: number
   }
 
   export type MessageUpdateWithoutDialogInput = {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     sender?: UserUpdateOneRequiredWithoutMessageNestedInput
   }
 
@@ -7423,7 +7195,8 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type MessageUncheckedUpdateManyWithoutDialogInput = {
@@ -7431,24 +7204,26 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
+    unreadById?: MessageUpdateunreadByIdInput | number[]
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
-  export type Named_dialogUpdateWithoutDialogInput = {
+  export type Dialog_participantUpdateWithoutDialogInput = {
     name?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateOneWithoutDialogsNestedInput
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutDialog_participantNestedInput
   }
 
-  export type Named_dialogUncheckedUpdateWithoutDialogInput = {
-    id?: IntFieldUpdateOperationsInput | number
+  export type Dialog_participantUncheckedUpdateWithoutDialogInput = {
     name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type Named_dialogUncheckedUpdateManyWithoutDialogInput = {
-    id?: IntFieldUpdateOperationsInput | number
+  export type Dialog_participantUncheckedUpdateManyWithoutDialogInput = {
     name?: StringFieldUpdateOperationsInput | string
-    userId?: NullableIntFieldUpdateOperationsInput | number | null
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
 
@@ -7469,13 +7244,13 @@ export namespace Prisma {
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use Named_dialogDefaultArgs instead
-     */
-    export type Named_dialogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Named_dialogDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use DialogDefaultArgs instead
      */
     export type DialogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DialogDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use Dialog_participantDefaultArgs instead
+     */
+    export type Dialog_participantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Dialog_participantDefaultArgs<ExtArgs>
     /**
      * @deprecated Use MessageDefaultArgs instead
      */

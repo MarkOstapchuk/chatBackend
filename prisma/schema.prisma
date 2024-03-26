@@ -21,40 +21,51 @@ model User {
   username   String   @unique
   password   String
   createdAt  DateTime @default(now()) @map("created_at")
-  pictureUrl String   @map("picture_url")
+  pictureUrl String?  @map("picture_url")
 
-  dialogs  Named_dialog[]
-  Message  Message[]
-  Dialog   Dialog?        @relation(fields: [dialogId], references: [id])
-  dialogId Int?
-}
-
-model Named_dialog {
-  id       Int    @id @default(autoincrement())
-  name     String
-  dialog   Dialog @relation(fields: [dialogId], references: [id])
-  dialogId Int
-  User     User?  @relation(fields: [userId], references: [id])
-  userId   Int?
+  dialog_participant Dialog_participant[]
+  message            Message[]
 }
 
 model Dialog {
-  id            Int            @id @default(autoincrement())
-  users_id      User[]
-  messages      Message[]
-  pictureUrl    String?        @map("picture_url")
-  lastMessage   String?        @map("last_message")
-  sentTime      DateTime?      @map("sent_time")
-  named_dialogs Named_dialog[]
+  id                  Int                  @id @default(autoincrement())
+  name                String?
+  pictureUrl          String?              @map("picture_url")
+  isGroup             Boolean              @default(false) @map("is_group")
+  sentTime            DateTime?            @map("sent_time")
+  lastMessage         String?              @map("last_message")
+  messages            Message[]
+  dialog_participants Dialog_participant[]
+}
+
+model Dialog_participant {
+  name       String
+  pictureUrl String? @map("picture_url")
+  dialog     Dialog  @relation(fields: [dialogId], references: [id])
+  dialogId   Int     @map("dialog_id")
+  user       User    @relation(fields: [userId], references: [id])
+  userId     Int     @map("user_id")
+
+  @@id([dialogId, userId])
 }
 
 model Message {
   id        Int      @id @default(autoincrement())
   text      String
   createdAt DateTime @default(now()) @map("created_at")
-  sender    User     @relation(fields: [senderId], references: [id])
-  senderId  Int      @map("sender_id")
-  Dialog    Dialog   @relation(fields: [dialogId], references: [id])
-  dialogId  Int      @map("dialog_id")
-  isRead    Boolean  @default(false) @map("is_read")
+
+  sender   User @relation(fields: [senderId], references: [id])
+  senderId Int  @map("sender_id")
+
+  dialog   Dialog @relation(fields: [dialogId], references: [id])
+  dialogId Int    @map("dialog_id")
+
+  unreadById Int[]  @map("unread_by_id")
+  status     Status
+}
+
+enum Status {
+  SENT
+  FAILED
+  READ
 }

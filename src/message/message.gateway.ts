@@ -59,9 +59,6 @@ export class MessageGateway
       .emit('messages', messages)
   }
 
-  // удаление всех сообщений
-
-  // создание сообщения
   @SubscribeMessage('message:post')
   async handleMessagePost(
     @MessageBody()
@@ -75,22 +72,22 @@ export class MessageGateway
       payload.message
     )
     for (const item of payload.usersId) {
+      console.log(payload)
       if (this.connectedClients.get(item)) {
         if (this.connectedClients.get(item).dialog === null) {
           await this.handleMessagesGet({
             chatId: payload.message.dialogId,
             userId: item
           })
-          console.log(
-            `message ${createdMessage.message.text} sent to user ${item}`
-          )
+
+          console.log(`message ${createdMessage.text} sent to user ${item}`)
         } else {
           console.log(
-            `message ${createdMessage.message.text} sent to user ${item} but to another dialog`
+            `message ${createdMessage.text} sent to user ${item} but to another dialog`
           )
         }
       } else {
-        await this.messageService.updateReadMessage(payload.message.id, false)
+        await this.messageService.makeUnreadMessage(payload.message.id, item)
         console.log(`user ${item} is not online and couldn't receive a message`)
         console.log('so we need to set his messages to unread')
       }
@@ -104,33 +101,6 @@ export class MessageGateway
       chatId: number
     }
   ): Promise<void> {
-    await this.messageService.readAllMessages(payload.chatId)
-  }
-
-  // обновление сообщения
-  @SubscribeMessage('message:put')
-  async handleMessagePut(
-    @MessageBody()
-    payload: IMessageDto
-  ): Promise<void> {
-    const updatedMessage = await this.messageService.updateMessage(payload)
-    this.server.emit('message:put', updatedMessage)
-    //this.handleMessagesGet({ chatId: payload.dialogId })
-  }
-
-  @SubscribeMessage('messages:clear')
-  async handleMessagesClear(): Promise<void> {
-    await this.messageService.clearMessages()
-  }
-
-  // удаление сообщения
-  @SubscribeMessage('message:delete')
-  async handleMessageDelete(
-    @MessageBody()
-    payload: number
-  ) {
-    const removedMessage = await this.messageService.removeMessage(payload)
-    this.server.emit('message:delete', removedMessage)
-    //this.handleMessagesGet({ chatId: payload.dialogId })
+    await this.messageService.makeReadMessage(payload.chatId)
   }
 }

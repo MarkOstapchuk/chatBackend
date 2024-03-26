@@ -8,13 +8,24 @@ import { UserDto } from './user.dto'
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+  async create(dto: AuthDto) {
+    const user = {
+      email: dto.email,
+      username: dto.username,
+      password: await hash(dto.password)
+    }
+    return this.prisma.user.create({
+      data: user
+    })
+  }
+
   async getById(id: number) {
     const user = await this.prisma.user.findUnique({
       where: {
         id
       },
       include: {
-        dialogs: {
+        dialog_participant: {
           include: {
             dialog: true
           }
@@ -41,19 +52,6 @@ export class UserService {
       }
     })
     return users
-  }
-
-  async create(dto: AuthDto) {
-    const user = {
-      email: dto.email,
-      username: dto.username,
-      name: dto.name ?? '',
-      password: await hash(dto.password),
-      pictureUrl: dto.pictureUrl ?? ''
-    }
-    return this.prisma.user.create({
-      data: user
-    })
   }
 
   async update(id: number, dto: UserDto) {
