@@ -49,14 +49,19 @@ export class DialogService {
     }
   }
 
-  async getById(id: string) {
+  async getById(id: string, userId: number) {
     return this.prisma.dialog.findUnique({
       where: {
         id: +id
       },
       include: {
         messages: true,
-        named_dialogs: true
+        named_dialogs: {
+          where: {
+            userId: userId
+          }
+        },
+        users_id: true
       }
     })
   }

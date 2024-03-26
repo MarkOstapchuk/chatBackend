@@ -3263,6 +3263,7 @@ export namespace Prisma {
     pictureUrl: string | null
     lastMessage: string | null
     sentTime: Date | null
+    isRead: boolean | null
   }
 
   export type DialogMaxAggregateOutputType = {
@@ -3270,6 +3271,7 @@ export namespace Prisma {
     pictureUrl: string | null
     lastMessage: string | null
     sentTime: Date | null
+    isRead: boolean | null
   }
 
   export type DialogCountAggregateOutputType = {
@@ -3277,6 +3279,7 @@ export namespace Prisma {
     pictureUrl: number
     lastMessage: number
     sentTime: number
+    isRead: number
     _all: number
   }
 
@@ -3294,6 +3297,7 @@ export namespace Prisma {
     pictureUrl?: true
     lastMessage?: true
     sentTime?: true
+    isRead?: true
   }
 
   export type DialogMaxAggregateInputType = {
@@ -3301,6 +3305,7 @@ export namespace Prisma {
     pictureUrl?: true
     lastMessage?: true
     sentTime?: true
+    isRead?: true
   }
 
   export type DialogCountAggregateInputType = {
@@ -3308,6 +3313,7 @@ export namespace Prisma {
     pictureUrl?: true
     lastMessage?: true
     sentTime?: true
+    isRead?: true
     _all?: true
   }
 
@@ -3402,6 +3408,7 @@ export namespace Prisma {
     pictureUrl: string | null
     lastMessage: string | null
     sentTime: Date | null
+    isRead: boolean
     _count: DialogCountAggregateOutputType | null
     _avg: DialogAvgAggregateOutputType | null
     _sum: DialogSumAggregateOutputType | null
@@ -3428,6 +3435,7 @@ export namespace Prisma {
     pictureUrl?: boolean
     lastMessage?: boolean
     sentTime?: boolean
+    isRead?: boolean
     users_id?: boolean | Dialog$users_idArgs<ExtArgs>
     messages?: boolean | Dialog$messagesArgs<ExtArgs>
     named_dialogs?: boolean | Dialog$named_dialogsArgs<ExtArgs>
@@ -3439,6 +3447,7 @@ export namespace Prisma {
     pictureUrl?: boolean
     lastMessage?: boolean
     sentTime?: boolean
+    isRead?: boolean
   }
 
   export type DialogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3461,6 +3470,7 @@ export namespace Prisma {
       pictureUrl: string | null
       lastMessage: string | null
       sentTime: Date | null
+      isRead: boolean
     }, ExtArgs["result"]["dialog"]>
     composites: {}
   }
@@ -3864,6 +3874,7 @@ export namespace Prisma {
     readonly pictureUrl: FieldRef<"Dialog", 'String'>
     readonly lastMessage: FieldRef<"Dialog", 'String'>
     readonly sentTime: FieldRef<"Dialog", 'DateTime'>
+    readonly isRead: FieldRef<"Dialog", 'Boolean'>
   }
     
 
@@ -5261,7 +5272,8 @@ export namespace Prisma {
     id: 'id',
     pictureUrl: 'pictureUrl',
     lastMessage: 'lastMessage',
-    sentTime: 'sentTime'
+    sentTime: 'sentTime',
+    isRead: 'isRead'
   };
 
   export type DialogScalarFieldEnum = (typeof DialogScalarFieldEnum)[keyof typeof DialogScalarFieldEnum]
@@ -5346,6 +5358,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -5507,6 +5526,7 @@ export namespace Prisma {
     pictureUrl?: StringNullableFilter<"Dialog"> | string | null
     lastMessage?: StringNullableFilter<"Dialog"> | string | null
     sentTime?: DateTimeNullableFilter<"Dialog"> | Date | string | null
+    isRead?: BoolFilter<"Dialog"> | boolean
     users_id?: UserListRelationFilter
     messages?: MessageListRelationFilter
     named_dialogs?: Named_dialogListRelationFilter
@@ -5517,6 +5537,7 @@ export namespace Prisma {
     pictureUrl?: SortOrderInput | SortOrder
     lastMessage?: SortOrderInput | SortOrder
     sentTime?: SortOrderInput | SortOrder
+    isRead?: SortOrder
     users_id?: UserOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     named_dialogs?: Named_dialogOrderByRelationAggregateInput
@@ -5530,6 +5551,7 @@ export namespace Prisma {
     pictureUrl?: StringNullableFilter<"Dialog"> | string | null
     lastMessage?: StringNullableFilter<"Dialog"> | string | null
     sentTime?: DateTimeNullableFilter<"Dialog"> | Date | string | null
+    isRead?: BoolFilter<"Dialog"> | boolean
     users_id?: UserListRelationFilter
     messages?: MessageListRelationFilter
     named_dialogs?: Named_dialogListRelationFilter
@@ -5540,6 +5562,7 @@ export namespace Prisma {
     pictureUrl?: SortOrderInput | SortOrder
     lastMessage?: SortOrderInput | SortOrder
     sentTime?: SortOrderInput | SortOrder
+    isRead?: SortOrder
     _count?: DialogCountOrderByAggregateInput
     _avg?: DialogAvgOrderByAggregateInput
     _max?: DialogMaxOrderByAggregateInput
@@ -5555,6 +5578,7 @@ export namespace Prisma {
     pictureUrl?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
     lastMessage?: StringNullableWithAggregatesFilter<"Dialog"> | string | null
     sentTime?: DateTimeNullableWithAggregatesFilter<"Dialog"> | Date | string | null
+    isRead?: BoolWithAggregatesFilter<"Dialog"> | boolean
   }
 
   export type MessageWhereInput = {
@@ -5746,6 +5770,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserCreateNestedManyWithoutDialogInput
     messages?: MessageCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
@@ -5756,6 +5781,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
     messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
@@ -5765,6 +5791,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUpdateManyWithoutDialogNestedInput
     messages?: MessageUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
@@ -5775,6 +5802,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
@@ -5785,12 +5813,14 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
   }
 
   export type DialogUpdateManyMutationInput = {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DialogUncheckedUpdateManyInput = {
@@ -5798,6 +5828,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageCreateInput = {
@@ -6123,6 +6154,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
@@ -6138,6 +6174,7 @@ export namespace Prisma {
     pictureUrl?: SortOrder
     lastMessage?: SortOrder
     sentTime?: SortOrder
+    isRead?: SortOrder
   }
 
   export type DialogAvgOrderByAggregateInput = {
@@ -6149,6 +6186,7 @@ export namespace Prisma {
     pictureUrl?: SortOrder
     lastMessage?: SortOrder
     sentTime?: SortOrder
+    isRead?: SortOrder
   }
 
   export type DialogMinOrderByAggregateInput = {
@@ -6156,6 +6194,7 @@ export namespace Prisma {
     pictureUrl?: SortOrder
     lastMessage?: SortOrder
     sentTime?: SortOrder
+    isRead?: SortOrder
   }
 
   export type DialogSumOrderByAggregateInput = {
@@ -6174,6 +6213,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserRelationFilter = {
@@ -6419,6 +6466,10 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateManyWithoutDialogNestedInput = {
@@ -6707,6 +6758,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -6719,6 +6775,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type Named_dialogCreateWithoutUserInput = {
@@ -6769,6 +6833,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     messages?: MessageCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
   }
@@ -6778,6 +6843,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
   }
@@ -6855,6 +6921,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     messages?: MessageUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
   }
@@ -6864,6 +6931,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
   }
@@ -6872,6 +6940,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserCreateNestedManyWithoutDialogInput
     messages?: MessageCreateNestedManyWithoutDialogInput
   }
@@ -6881,6 +6950,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
     messages?: MessageUncheckedCreateNestedManyWithoutDialogInput
   }
@@ -6933,6 +7003,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUpdateManyWithoutDialogNestedInput
     messages?: MessageUpdateManyWithoutDialogNestedInput
   }
@@ -6942,6 +7013,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDialogNestedInput
   }
@@ -7151,6 +7223,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogCreateNestedManyWithoutDialogInput
   }
@@ -7160,6 +7233,7 @@ export namespace Prisma {
     pictureUrl?: string | null
     lastMessage?: string | null
     sentTime?: Date | string | null
+    isRead?: boolean
     users_id?: UserUncheckedCreateNestedManyWithoutDialogInput
     named_dialogs?: Named_dialogUncheckedCreateNestedManyWithoutDialogInput
   }
@@ -7218,6 +7292,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUpdateManyWithoutDialogNestedInput
   }
@@ -7227,6 +7302,7 @@ export namespace Prisma {
     pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessage?: NullableStringFieldUpdateOperationsInput | string | null
     sentTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     users_id?: UserUncheckedUpdateManyWithoutDialogNestedInput
     named_dialogs?: Named_dialogUncheckedUpdateManyWithoutDialogNestedInput
   }

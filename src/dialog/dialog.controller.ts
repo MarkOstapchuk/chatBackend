@@ -26,8 +26,8 @@ export class DialogController {
 
   @Get('/:id')
   @Auth()
-  async getDialog(@Param('id') id: string) {
-    return this.dialogService.getById(id)
+  async getDialog(@Param('id') id: string, @CurrentUser('id') userId: number) {
+    return this.dialogService.getById(id, userId)
   }
 
   @Get('/named/:id')

@@ -46,6 +46,7 @@ model Dialog {
   lastMessage   String?        @map("last_message")
   sentTime      DateTime?      @map("sent_time")
   named_dialogs Named_dialog[]
+  isRead        Boolean        @default(false) @map("is_read")
 }
 
 model Message {
