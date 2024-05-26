@@ -10,11 +10,16 @@ export class DialogController {
   @Auth()
   @Post()
   async create(
-    @Body() data: { userId: number; name: string },
+    @Body()
+    data: { userId: number; name: string; pictureUrl: string | undefined },
     @CurrentUser('id') id: number,
-    @CurrentUser('username') name: string
+    @CurrentUser('username') name: string,
+    @CurrentUser('pictureUrl') pictureUrl: string
   ) {
-    return this.dialogService.createDialog([data, { userId: id, name }])
+    return this.dialogService.createDialog([
+      data,
+      { userId: id, name, pictureUrl }
+    ])
   }
 
   // @Get()

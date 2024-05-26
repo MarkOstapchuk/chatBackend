@@ -27,21 +27,33 @@ export class UserService {
       include: {
         dialog_participant: {
           include: {
-            dialog: true
+            dialog: true,
+            user: true
+          },
+          orderBy: {
+            dialog: {
+              sentTime: 'asc'
+            }
           }
         }
       }
     })
+    // user.dialog_participant = user.dialog_participant.sort((a, b) => {
+    //   return a.dialog.sentTime?.getTime() - b.dialog.sentTime?.getTime()
+    // })
     if (!user) throw new NotFoundException(`User with id ${id} not found`)
 
     return user
   }
 
-  async findUsers(username: string) {
-    const users = await this.prisma.user.findMany({
+  async findUsers(username: string, id: number) {
+    return this.prisma.user.findMany({
       where: {
         username: {
           contains: username
+        },
+        id: {
+          not: id
         }
       },
       select: {
@@ -51,19 +63,39 @@ export class UserService {
         pictureUrl: true
       }
     })
-    return users
   }
 
-  async update(id: number, dto: UserDto) {
-    let data = dto
-    if (dto.password) {
-      data = { ...dto, password: await hash(dto.password) }
-    }
+  async findDialogs(username: string, id: number) {
+    return this.prisma.user.findUnique({
+      where: {
+        id
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        pictureUrl: true,
+        dialog_participant: {
+          where: {
+            name: {
+              contains: username
+            }
+          },
+          include: {
+            dialog: true,
+            user: true
+          }
+        }
+      }
+    })
+  }
+
+  async update(id: number, dto: Partial<UserDto>) {
     return this.prisma.user.update({
       where: {
         id
       },
-      data
+      data: dto
     })
   }
 

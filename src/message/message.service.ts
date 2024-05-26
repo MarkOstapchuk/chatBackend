@@ -1,17 +1,95 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma.service'
 import { CreateMessageDto } from './message.dto'
-import { Status } from '../../prisma/generated/client'
+import { Status, Type } from '../../prisma/generated/client'
 
 @Injectable()
 export class MessageService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async makeOnline(userId: number) {
+    await this.prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        online: true
+      }
+    })
+  }
+
+  async makeOffline(userId: number) {
+    await this.prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        online: false
+      }
+    })
+  }
+
   async createMessage(data: CreateMessageDto) {
+    await this.prisma.dialog.update({
+      where: {
+        id: data.dialogId
+      },
+      data: {
+        lastMessage: data.text,
+        sentTime: new Date()
+      }
+    })
+    return this.prisma.message.create({
+      data: {
+        type: Type.TEXT,
+        ...data,
+        status: Status.SENT
+      }
+    })
+  }
+
+  async createMessageImage(data: CreateMessageDto) {
+    await this.prisma.dialog.update({
+      where: {
+        id: data.dialogId
+      },
+      data: {
+        lastMessage: 'SENT IMAGE',
+        sentTime: new Date()
+      }
+    })
     return this.prisma.message.create({
       data: {
         ...data,
+        type: Type.IMAGE,
         status: Status.SENT
+      }
+    })
+  }
+
+  async createMessageFile(data: CreateMessageDto) {
+    await this.prisma.dialog.update({
+      where: {
+        id: data.dialogId
+      },
+      data: {
+        lastMessage: 'SENT FILE',
+        sentTime: new Date()
+      }
+    })
+    return this.prisma.message.create({
+      data: {
+        ...data,
+        type: Type.FILE,
+        status: Status.SENT
+      }
+    })
+  }
+
+  async deleteMessage(messageId: number) {
+    return this.prisma.message.delete({
+      where: {
+        id: messageId
       }
     })
   }
@@ -25,12 +103,15 @@ export class MessageService {
             dialog_participants: true
           }
         }
+      },
+      orderBy: {
+        id: 'asc'
       }
     })
   }
 
-  async makeUnreadMessage(messageId: number, userId: number) {
-    this.prisma.message.update({
+  async makeUnreadMessage(messageId: number, userId: number, dialogId: number) {
+    await this.prisma.message.update({
       where: {
         id: messageId
       },
@@ -40,17 +121,35 @@ export class MessageService {
         }
       }
     })
+    await this.prisma.dialog_participant.update({
+      where: {
+        dialogId_userId: { dialogId, userId }
+      },
+      data: {
+        notificationCount: {
+          increment: 1
+        }
+      }
+    })
   }
 
-  async makeReadMessage(messageId: number) {
-    this.prisma.message.update({
+  async makeReadMessages(dialogId: number, userId: number) {
+    await this.prisma.message.updateMany({
       where: {
-        id: messageId
+        dialogId: dialogId
       },
       data: {
         unreadById: {
           set: []
         }
+      }
+    })
+    await this.prisma.dialog_participant.update({
+      where: {
+        dialogId_userId: { dialogId, userId }
+      },
+      data: {
+        notificationCount: 0
       }
     })
   }

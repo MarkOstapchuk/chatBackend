@@ -114,7 +114,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   createdAt: 'createdAt',
-  pictureUrl: 'pictureUrl'
+  pictureUrl: 'pictureUrl',
+  online: 'online'
 };
 
 exports.Prisma.DialogScalarFieldEnum = {
@@ -129,8 +130,10 @@ exports.Prisma.DialogScalarFieldEnum = {
 exports.Prisma.Dialog_participantScalarFieldEnum = {
   name: 'name',
   pictureUrl: 'pictureUrl',
+  online: 'online',
   dialogId: 'dialogId',
-  userId: 'userId'
+  userId: 'userId',
+  notificationCount: 'notificationCount'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -140,7 +143,8 @@ exports.Prisma.MessageScalarFieldEnum = {
   senderId: 'senderId',
   dialogId: 'dialogId',
   unreadById: 'unreadById',
-  status: 'status'
+  status: 'status',
+  type: 'type'
 };
 
 exports.Prisma.SortOrder = {
@@ -161,6 +165,12 @@ exports.Status = exports.$Enums.Status = {
   SENT: 'SENT',
   FAILED: 'FAILED',
   READ: 'READ'
+};
+
+exports.Type = exports.$Enums.Type = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  FILE: 'FILE'
 };
 
 exports.Prisma.ModelName = {

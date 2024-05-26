@@ -1,7 +1,18 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors
+} from '@nestjs/common'
 import { UserService } from './user.service'
 import { Auth } from '../auth/decorators/auth.decorators'
 import { CurrentUser } from '../auth/decorators/user.decorator'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { diskStorage } from 'multer'
+import { extname, join } from 'path'
 
 @Controller('user')
 export class UserController {
@@ -20,8 +31,21 @@ export class UserController {
   }
 
   @Get('/search/:username')
-  async findUsers(@Param('username') username: string) {
-    return this.userService.findUsers(username)
+  @Auth()
+  async findUsers(
+    @Param('username') username: string,
+    @CurrentUser('id') id: number
+  ) {
+    return this.userService.findUsers(username, id)
+  }
+
+  @Get('/searchDialog/:username')
+  @Auth()
+  async findDialogs(
+    @Param('username') username: string,
+    @CurrentUser('id') id: number
+  ) {
+    return this.userService.findDialogs(username, id)
   }
 
   @Get('/profile')
@@ -33,6 +57,43 @@ export class UserController {
   @Get(':id')
   @Auth()
   async getUserById(@Param('id') id: string) {
+    console.log(id)
     return this.userService.getById(+id)
+  }
+
+  @Post('upload')
+  @Auth()
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: 'public/img',
+        filename: (req, file, cb) => {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('')
+          //Calling the callback passing the random name generated with the original extension name
+          cb(null, `${randomName}${extname(file.originalname)}`)
+        }
+      })
+    })
+  )
+  async local(
+    @UploadedFile() file: Express.Multer.File,
+    @CurrentUser('id') id: string
+  ) {
+    const updatedUser = await this.userService.update(+id, {
+      pictureUrl: file.filename
+    })
+    return {
+      statusCode: 200,
+      data: updatedUser
+    }
+  }
+
+  @Get('/image/:filename')
+  async getImage(@Res() res, @Param('filename') filename) {
+    const filePath = join(__dirname, '../..', 'public', 'img', filename)
+    res.sendFile(filePath)
   }
 }
