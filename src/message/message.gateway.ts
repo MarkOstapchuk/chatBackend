@@ -115,7 +115,9 @@ export class MessageGateway
   ) {
     for (const item of payload.usersId) {
       if (this.connectedClients.get(item)) {
-        if (this.connectedClients.get(item).dialog !== null) {
+        if (
+          this.connectedClients.get(item).dialog === createdMessage.dialogId
+        ) {
           await this.handleMessagesGet({
             chatId: payload.message.dialogId,
             userId: item

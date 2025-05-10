@@ -25,10 +25,10 @@ export class UserService {
         id
       },
       include: {
-        dialog_participant: {
+        dialog_participants_contains: {
           include: {
             dialog: true,
-            user: true
+            userRef: true
           },
           orderBy: {
             dialog: {
@@ -75,10 +75,12 @@ export class UserService {
         name: true,
         username: true,
         pictureUrl: true,
-        dialog_participant: {
+        dialog_participants_in: {
           where: {
-            name: {
-              contains: username
+            userRef: {
+              name: {
+                contains: username
+              }
             }
           },
           include: {

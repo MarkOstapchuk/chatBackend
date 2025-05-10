@@ -16,10 +16,11 @@ export class DialogController {
     @CurrentUser('username') name: string,
     @CurrentUser('pictureUrl') pictureUrl: string
   ) {
-    return this.dialogService.createDialog([
-      data,
-      { userId: id, name, pictureUrl }
-    ])
+    return this.dialogService.createDialog(data, {
+      userId: id,
+      name,
+      pictureUrl
+    })
   }
 
   // @Get()

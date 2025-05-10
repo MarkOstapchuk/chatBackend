@@ -15,16 +15,17 @@ datasource db {
 }
 
 model User {
-  id                 Int                  @id @default(autoincrement())
-  name               String?
-  email              String               @unique
-  username           String               @unique
-  password           String
-  createdAt          DateTime             @default(now()) @map("created_at")
-  pictureUrl         String?              @map("picture_url")
-  online             Boolean              @default(false)
-  dialog_participant Dialog_participant[]
-  message            Message[]
+  id                           Int                  @id @default(autoincrement())
+  name                         String?
+  email                        String               @unique
+  username                     String               @unique
+  password                     String
+  createdAt                    DateTime             @default(now()) @map("created_at")
+  pictureUrl                   String?              @map("picture_url")
+  online                       Boolean              @default(false)
+  dialog_participants_contains Dialog_participant[] @relation("UserDialogs")
+  dialog_participants_in       Dialog_participant[] @relation("UserReferences")
+  message                      Message[]
 }
 
 model Dialog {
@@ -39,14 +40,14 @@ model Dialog {
 }
 
 model Dialog_participant {
-  name              String
-  pictureUrl        String? @map("picture_url")
-  online            Boolean @default(false)
-  dialog            Dialog  @relation(fields: [dialogId], references: [id])
-  dialogId          Int     @map("dialog_id")
-  user              User    @relation(fields: [userId], references: [id])
-  userId            Int     @map("user_id")
-  notificationCount Int     @default(0) @map("notification_count")
+  user      User   @relation("UserDialogs", fields: [userId], references: [id])
+  userRef   User   @relation("UserReferences", fields: [userRefId], references: [id])
+  userRefId Int    @map("user_ref_id")
+  dialog    Dialog @relation(fields: [dialogId], references: [id])
+  dialogId  Int    @map("dialog_id")
+
+  userId            Int @map("user_id")
+  notificationCount Int @default(0) @map("notification_count")
 
   @@id([dialogId, userId])
 }
@@ -59,9 +60,8 @@ model Message {
   sender   User @relation(fields: [senderId], references: [id])
   senderId Int  @map("sender_id")
 
-  dialog   Dialog @relation(fields: [dialogId], references: [id])
-  dialogId Int    @map("dialog_id")
-
+  dialog     Dialog @relation(fields: [dialogId], references: [id])
+  dialogId   Int    @map("dialog_id")
   unreadById Int[]  @map("unread_by_id")
   status     Status
   type       Type

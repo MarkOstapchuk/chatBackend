@@ -19,7 +19,7 @@ export class MessageService {
   }
 
   async makeOffline(userId: number) {
-    await this.prisma.user.update({
+    const user = await this.prisma.user.update({
       where: {
         id: userId
       },
@@ -27,6 +27,7 @@ export class MessageService {
         online: false
       }
     })
+    console.log(user)
   }
 
   async createMessage(data: CreateMessageDto) {

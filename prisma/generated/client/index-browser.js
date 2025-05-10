@@ -128,9 +128,7 @@ exports.Prisma.DialogScalarFieldEnum = {
 };
 
 exports.Prisma.Dialog_participantScalarFieldEnum = {
-  name: 'name',
-  pictureUrl: 'pictureUrl',
-  online: 'online',
+  userRefId: 'userRefId',
   dialogId: 'dialogId',
   userId: 'userId',
   notificationCount: 'notificationCount'

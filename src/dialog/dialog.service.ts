@@ -6,26 +6,26 @@ export class DialogService {
   constructor(private prisma: PrismaService) {}
 
   async createDialog(
-    data: { userId: number; name: string; pictureUrl: string | undefined }[]
+    data: { userId: number; name: string; pictureUrl: string | undefined },
+    user: { userId: number; name: string; pictureUrl: string | undefined }
   ) {
     const checkDialog = await this.prisma.dialog.findMany({
       where: {
         dialog_participants: {
           every: {
             userId: {
-              in: [...data.map((item) => item.userId)]
+              in: [data.userId, user.userId]
             }
           }
         }
       }
     })
-    const tmpName = data[0].name
-    const tmpPicture = data[0].pictureUrl
-    data[0].name = data[1].name
-    data[0].pictureUrl = data[1].pictureUrl
-    data[1].name = tmpName
-    data[1].pictureUrl = tmpPicture
-    console.log(data)
+    // const tmpName = data[0].name
+    // const tmpPicture = data[0].pictureUrl
+    // data[0].name = data[1].name
+    // data[0].pictureUrl = data[1].pictureUrl
+    // data[1].name = tmpName
+    // data[1].pictureUrl = tmpPicture
     if (checkDialog.length > 0) {
       throw new BadRequestException('Dialog already exists')
     }
@@ -34,7 +34,10 @@ export class DialogService {
       data: {
         dialog_participants: {
           createMany: {
-            data: data
+            data: [
+              { userId: user.userId, userRefId: data.userId },
+              { userId: data.userId, userRefId: user.userId }
+            ]
           }
         }
       },
@@ -51,7 +54,12 @@ export class DialogService {
       },
       include: {
         messages: true,
-        dialog_participants: true
+        dialog_participants: {
+          include: {
+            user: true,
+            userRef: true
+          }
+        }
       }
     })
   }
